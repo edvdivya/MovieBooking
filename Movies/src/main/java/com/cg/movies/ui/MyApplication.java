@@ -185,7 +185,7 @@ public class MyApplication {
 					scanner.nextLine();
 					break;
 				case 3:
-					System.out.println("Enter the theatre details");
+					System.out.println("");
 					try {
 						service.addTheatre(new Theatre("Elante", 160087, "rajmundry", "Chandigarh", "Rajveer","9814357234", listofScreensT1, listofMovies));
 					} catch (Exception exception) {
