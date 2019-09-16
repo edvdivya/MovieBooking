@@ -64,11 +64,11 @@ public class TheatreDaoImpl implements TheatreDao{
 		        theatres.remove(theatreId);
 		        return theatre;
 		    }
-		    public Theatre removeMovie(Integer theatreId) {
-		        Theatre theatre = theatres.get(theatreId);
-		        theatres.remove(theatreId);
-		        return theatre;
-		    }
+//		    public List<Movie> removeMovie(Integer theatreId, Integer movieId) {
+//		        Movie = theatres.get(theatreId);
+//		        theatres.remove(theatreId);
+//		        return theatre;
+//		    }
 
 		    @Override
 		    public Set<Movie> getMovies(Integer cityPincode) {

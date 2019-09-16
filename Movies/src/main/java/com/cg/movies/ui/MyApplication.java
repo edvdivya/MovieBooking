@@ -100,7 +100,7 @@ public class MyApplication {
 
 			case 1:
 				System.out.println("1. Add Movie To Theater");
-				System.out.println("2. Remove Movie From Theater");
+				System.out.println("2. Remove Movie Show From Theater");
 				System.out.println("3. Add Theater");
 				System.out.println("4. Delete Theater");
 				System.out.println("5. Get Cities");
@@ -157,7 +157,7 @@ public class MyApplication {
 						}
 					}
 					else {
-						System.out.println("Movie not added");
+						System.out.println("Movie could not be added");
 					}
 
 					scanner.nextLine();
@@ -171,7 +171,6 @@ public class MyApplication {
 						System.out.println(service.getMoviesinTheatre(theatreId).get(i).getMovieId() + " "
 								+ service.getMoviesinTheatre(theatreId).get(i).getMovieName());
 						}
-					System.out.println("Enter the Movie Id : ");
 					
 					for (int i = 0; i < service.getScreensInTheatre(theatreId).size(); i++) {
 						System.out.println(service.getScreensInTheatre(theatreId).get(i));
