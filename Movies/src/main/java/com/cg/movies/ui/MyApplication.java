@@ -19,7 +19,7 @@ public class MyApplication {
 		java.util.Date movieEndDate = sdf.parse("2020-07-05");
 		java.util.Date releaseDate1 = sdf.parse("2019-09-10");
 		java.util.Date movieEndDate1 = sdf.parse("2019-09-17");
-
+		System.out.println("In admin functions");
 		SimpleDateFormat sdf1 = new SimpleDateFormat("hh:mm:ss");
 		java.util.Date showStartTimeSM11 = sdf1.parse("2:05:00");// screen1
 		java.util.Date showEndTimeSM11 = sdf1.parse("16:00:00");
