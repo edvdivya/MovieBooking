@@ -313,7 +313,7 @@ public class MyApplication {
 					System.out.println("Enter your contact");
 
 					System.out.println("Enter the password");
-					System.out.println("Confirm password");
+					
 					break;
 				case 2:
 					// prints list of movies
