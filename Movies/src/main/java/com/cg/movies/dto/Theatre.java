@@ -9,8 +9,6 @@ public class Theatre {
 	    private final Integer cityPincode;
 	    private final String cityName;
 	    private final String theatreLocation;
-	    private final String managerName;
-	    private final String managerContact;
 	    private List<Screen> screens;
 	    private List<Movie> movies;
 	    private static Integer count=0;
@@ -23,20 +21,16 @@ public class Theatre {
 	        this.cityPincode = cityPincode;
 	        this.cityName = cityName;
 	        this.theatreLocation = theatreLocation;
-	        this.managerName = managerName;
-	        this.managerContact = managerContact;
+
 	    }
 
 	    public Theatre(String theatreName, Integer cityPincode, String cityName,
-	                   String theatreLocation, String managerName, String managerContact,
-	                   List<Screen> screens, List<Movie> movies) {
+	                   String theatreLocation, List<Screen> screens, List<Movie> movies) {
 	        this.theatreId = ++count;
 	        this.theatreName = theatreName;
 	        this.cityPincode = cityPincode;
 	        this.cityName = cityName;
 	        this.theatreLocation = theatreLocation;
-	        this.managerName = managerName;
-	        this.managerContact = managerContact;
 	        this.screens = screens;
 	        this.movies = movies;
 	    }
@@ -61,14 +55,7 @@ public class Theatre {
 	        return theatreLocation;
 	    }
 
-	    public String getManagerName() {
-	        return managerName;
-	    }
-
-	    public String getManagerContact() {
-	        return managerContact;
-	    }
-
+	    
 	    public List<Screen> getScreens() {
 	        return screens;
 	    }
@@ -99,8 +86,6 @@ public class Theatre {
 	        int result = 1;
 	        result = prime * result + ((cityName == null) ? 0 : cityName.hashCode());
 	        result = prime * result + ((cityPincode == null) ? 0 : cityPincode.hashCode());
-	        result = prime * result + ((managerContact == null) ? 0 : managerContact.hashCode());
-	        result = prime * result + ((managerName == null) ? 0 : managerName.hashCode());
 	        result = prime * result + ((movies == null) ? 0 : movies.hashCode());
 	        result = prime * result + ((screens == null) ? 0 : screens.hashCode());
 	        result = prime * result + ((theatreLocation == null) ? 0 : theatreLocation.hashCode());
@@ -126,16 +111,6 @@ public class Theatre {
 	            if (other.cityPincode != null)
 	                return false;
 	        } else if (!cityPincode.equals(other.cityPincode))
-	            return false;
-	        if (managerContact == null) {
-	            if (other.managerContact != null)
-	                return false;
-	        } else if (!managerContact.equals(other.managerContact))
-	            return false;
-	        if (managerName == null) {
-	            if (other.managerName != null)
-	                return false;
-	        } else if (!managerName.equals(other.managerName))
 	            return false;
 	        if (movies == null) {
 	            if (other.movies != null)
@@ -168,8 +143,6 @@ public class Theatre {
 	                ", cityPincode=" + cityPincode +
 	                ", cityName='" + cityName + '\'' +
 	                ", theatreLocation='" + theatreLocation + '\'' +
-	                ", managerName='" + managerName + '\'' +
-	                ", managerContact='" + managerContact + '\'' +
 	                ", screens=" + screens +
 	                ", movies=" + movies +
 	                '}';

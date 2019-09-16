@@ -23,11 +23,7 @@ public class Validate {
 	            theatre.setCount();
 	            throw new UserException("city pincode contains only digits");
 	        }
-	        str=""+theatre.getManagerContact();
-	        if(!str.matches("\\d{10}")){
-	            theatre.setCount();
-	            throw new UserException("contact number should be 10 digits");
-	        }
+	        
 	        if(!theatre.getCityName().matches("[a-zA-Z]+")){
 	            theatre.setCount();
 	            throw new UserException("city name can not have special charecters");

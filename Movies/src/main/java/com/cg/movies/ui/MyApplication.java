@@ -30,30 +30,23 @@ public class MyApplication {
 		java.util.Date showEndTimeSM22 = sdf1.parse("21:00:00");
 		java.util.Date showStartTimeSM23 = sdf1.parse("19:05:00");
 		java.util.Date showEndTimeSM23 = sdf1.parse("22:00:00");
-		// java.util.Date movieDate = sdf.parse("2019-09-11");
+		
 		Map<Date, List<String>> bookedSeats = new HashMap<Date, List<String>>();
-		Map<Date, List<String>> blockedSeats = new HashMap<Date, List<String>>();
+		
 		ArrayList<Show> listofShowsMovie1 = new ArrayList<Show>();
 		ArrayList<Show> listofShowsMovie2 = new ArrayList<Show>();
 		ArrayList<Movie> listofMovies = new ArrayList<Movie>();
 
 		try {
 			Movie movie1 = new Movie("Article 15", "Comedy Drama", "Rajkumar Hirani", 125, releaseDate, "English");
-			Movie movie2 = new Movie("Romeo Akbar Walter", "Thriller Drama", "SiddraJ Films", 195, releaseDate1,
-					"Hindi");
-
+			Movie movie2 = new Movie("Romeo Akbar Walter", "Thriller Drama", "SiddraJ Films", 195, releaseDate1,"Hindi");
 			listofMovies.add(movie1);
 			listofMovies.add(movie2);
-			Show showM11 = new Show(movie1, movieEndDate, "English", showStartTimeSM11, showEndTimeSM11, bookedSeats,
-					blockedSeats);
-			Show showM12 = new Show(movie1, movieEndDate, "English", showStartTimeSM12, showEndTimeSM12, bookedSeats,
-					blockedSeats);
-			Show showM21 = new Show(movie2, movieEndDate, "English", showStartTimeSM21, showEndTimeSM21, bookedSeats,
-					blockedSeats);
-			Show showM22 = new Show(movie2, movieEndDate, "English", showStartTimeSM22, showEndTimeSM22, bookedSeats,
-					blockedSeats);
-			Show showM23 = new Show(movie2, movieEndDate, "English", showStartTimeSM23, showEndTimeSM23, bookedSeats,
-					blockedSeats);
+			Show showM11 = new Show(movie1, movieEndDate, "English", showStartTimeSM11, showEndTimeSM11, bookedSeats);
+			Show showM12 = new Show(movie1, movieEndDate, "English", showStartTimeSM12, showEndTimeSM12, bookedSeats);
+			Show showM21 = new Show(movie2, movieEndDate, "English", showStartTimeSM21, showEndTimeSM21, bookedSeats);
+			Show showM22 = new Show(movie2, movieEndDate, "English", showStartTimeSM22, showEndTimeSM22, bookedSeats);
+			Show showM23 = new Show(movie2, movieEndDate, "English", showStartTimeSM23, showEndTimeSM23, bookedSeats);
 			listofShowsMovie1.add(showM11);
 			listofShowsMovie1.add(showM12);
 			listofShowsMovie2.add(showM21);
@@ -76,12 +69,9 @@ public class MyApplication {
 		listofScreensT2.add(screenT22);
 		listofScreensT3.add(screenT31);
 		listofScreensT3.add(screenT32);
-		Theatre theatre1 = new Theatre("Elante Mall", 160087, "kurnool", "Chandigarh", "Rajveer", "9814357234",
-				listofScreensT1, listofMovies);
-		Theatre theatre2 = new Theatre("Wave Cinemas", 160023, "Chandigarh", "Chandigarh", "Priyank", "8965234121",
-				listofScreensT2, listofMovies);
-		Theatre theatre3 = new Theatre("Saket CityMall", 140078, "Delhi", "Chandigarh", "Balwinder", "7865435652",
-				listofScreensT3, listofMovies);
+		Theatre theatre1 = new Theatre("Elante Mall", 160087, "kurnool", "Chandigarh",listofScreensT1, listofMovies);
+		Theatre theatre2 = new Theatre("Wave Cinemas", 160023, "Chandigarh", "Chandigarh",listofScreensT2, listofMovies);
+		Theatre theatre3 = new Theatre("Saket CityMall", 140078, "Delhi", "Chandigarh",listofScreensT3, listofMovies);
 		service.addTheatre(theatre1);
 		service.addTheatre(theatre2);
 		service.addTheatre(theatre3);
@@ -137,7 +127,7 @@ public class MyApplication {
 
 					Movie movie = new Movie(name, genre, director, movieLength, date, language);
 
-					Show show = new Show(movie, sdf.parse("2019-06-28"), language, sdf1.parse("12:05:00"),sdf1.parse("3:05:00"), bookedSeats, blockedSeats);
+					Show show = new Show(movie, sdf.parse("2019-06-28"), language, sdf1.parse("12:05:00"),sdf1.parse("3:05:00"), bookedSeats);
 					System.out.println(service.getScreensInTheatre(theaterid).size() + " Screens exist");
 					System.out.println("Existing Screen Id are: ");
 					for (int i = 0; i < service.getScreensInTheatre(theaterid).size(); i++) {
@@ -186,7 +176,7 @@ public class MyApplication {
 				case 3:
 					System.out.println("");
 					try {
-						service.addTheatre(new Theatre("Elante", 160087, "rajmundry", "Chandigarh", "Rajveer","9814357234", listofScreensT1, listofMovies));
+						service.addTheatre(new Theatre("Elante", 160087, "rajmundry", "Chandigarh",listofScreensT1, listofMovies));
 					} catch (Exception exception) {
 						System.out.println(exception.getMessage());
 					}

@@ -16,11 +16,11 @@ public class Show {
     private Date showStartTime;
     private Date showEndTime;
     private Map<Date,List<String>> bookedSeats;
-    private Map<Date,List<String>> blockedSeats;
+    
     private static int count=0;
 
     public Show(Movie currentMovie, Date movieEndDate, String language, Date showStartTime,
-                Date showEndTime, Map<Date,List<String>> bookedSeats, Map<Date,List<String>> blockedSeats) throws Exception {
+                Date showEndTime, Map<Date,List<String>> bookedSeats) throws Exception {
         this.showId=++count;
         this.currentMovie = currentMovie;
         this.movieEndDate = movieEndDate;
@@ -35,7 +35,7 @@ public class Show {
             str="2019-07-"+i;
             //this.bookedSeats.put(sdf.parse(str),new ArrayList<>());
         }
-        this.blockedSeats = blockedSeats;
+    
     }
 
     public Integer getShowId() {
@@ -92,14 +92,7 @@ public class Show {
         this.bookedSeats = bookedSeats;
     }
 
-    public Map<Date, List<String>> getBlockedSeats() {
-        return blockedSeats;
-    }
-
-    public void setBlockedSeats(Map<Date,List<String>> blockedSeats) {
-        this.blockedSeats = blockedSeats;
-    }
-
+    
     public static int getCount() {
         return count;
     }
