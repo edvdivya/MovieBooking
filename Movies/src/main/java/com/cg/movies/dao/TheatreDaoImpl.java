@@ -1,12 +1,43 @@
 package com.cg.movies.dao;
+import com.cg.movies.exception.MyException;
+import com.cg.movies.util.DBUtil;
 import com.cg.movies.dto.Movie;
 import com.cg.movies.dto.Screen;
 import com.cg.movies.dto.Show;
 import com.cg.movies.dto.Theatre;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.*;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 public class TheatreDaoImpl implements TheatreDao{
 
+	private static Connection connection;
+	private PreparedStatement ps;
+	private Statement st;
+	private ResultSet rs;
+	private static Logger myLogger;
+	static {
+		Properties props = System.getProperties();
+		String userDir = props.getProperty("user.dir") + "/src/main/resources/";
+		System.out.println("Current working directory is " + userDir);
+		PropertyConfigurator.configure(userDir + "log4j.properties");
+		myLogger = Logger.getLogger("TheatreDaoImpl.class");
+	}
+
+	static {
+		try {
+			connection = DBUtil.getConnection();
+			myLogger.info("connection Obtained!!");
+		} catch (MyException e) {
+			myLogger.error("Connection Not Obtained at authorDao : " + e);
+		}
+	}
 		    private static Map<Integer, Theatre> theatres = new HashMap<>();
 
 		    @Override
