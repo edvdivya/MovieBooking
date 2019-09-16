@@ -1,5 +1,5 @@
 package com.cg.movies.dto;
-import java.time.LocalDate;
+
 import java.util.*;
 
 	public class Customer {
@@ -7,50 +7,18 @@ import java.util.*;
 		public Integer customerId;
 		private String password;    
 		private String customerName;
-		private LocalDate dateOfBirth;
-	    private List<Booking> myBooking;
-	    private String customerContact;
+	    private List<Booking> myBooking = null;
 			
 
 			/**
 			* Default constructor
 			*/
 		    public Customer() {
-		    }
-			
-			public Customer(String customerName, LocalDate dateOfBirth, String customerContact) {
-				this.customerName = customerContact;
-				this.dateOfBirth = dateOfBirth;
-				this.customerContact = customerContact;
+		    	
 		    }
 
-			 public boolean signIn(Integer customerId,  String password) {
-			        // TODO implement her
-					if(this.customerId.equals(customerId))
-						if(this.password.equals(password))
-							return true;
-						
-					return true;
-		    }
-			 
-//		    public List<Seat> cancelMovieTicket(Ticket ticket) {
-//				List<Seat> listOfSeat = ticket.listOfSeat;
-//				ListIterator<Seat> litr;
-//				litr = listOfSeat.listIterator();
-//				
-//				while(litr.hasNext()){
-//					litr.next().seatStatus = SeatStatus.AVAILABLE;
-//				}
-//				
-//				return listOfSeat;
-//		    }
-
-		    public Boolean chooseCity(Integer cityPincode) {
-		        return null;
-		    }
+				    
 		    
-		    
-		    /**********Getters and Setters***********/
 		    public Integer getCustomerId() {
 				return customerId;
 			}
@@ -75,54 +43,24 @@ import java.util.*;
 				this.customerName = customerName;
 			}
 
-			public LocalDate getDateOfBirth() {
-				return dateOfBirth;
+			public List<Booking> getMyBooking() {
+				return myBooking;
 			}
 
-			public void setDateOfBirth(LocalDate dateOfBirth) {
-				this.dateOfBirth = dateOfBirth;
+			public void setMyBooking(List<Booking> myBooking) {
+				this.myBooking = myBooking;
 			}
 
-			public List<Booking> getMyTickets() {
-				return null;
-			}
-
-			
-
-			public String getCustomerContact() {
-				return customerContact;
-			}
-
-			public void setCustomerContact(String customerContact) {
-				this.customerContact = customerContact;
-			}
-
-			@Override
-			public int hashCode() {
-				final int prime = 31;
-				int result = 1;
-				result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
-				return result;
-			}
-
-			@Override
-			public boolean equals(Object obj) {
-				if (this == obj)
+			public boolean signIn(Integer customerId,  String password) {
+			        // TODO implement her
+					if(this.customerId.equals(customerId))
+						if(this.password.equals(password))
+							return true;
+						
 					return true;
-				if (obj == null)
-					return false;
-				if (getClass() != obj.getClass())
-					return false;
-				Customer other = (Customer) obj;
-				if (customerId == null) {
-					if (other.customerId != null)
-						return false;
-				} else if (!customerId.equals(other.customerId))
-					return false;
-				return true;
-			}
+		    }
 
-		}
+}
 
 
 

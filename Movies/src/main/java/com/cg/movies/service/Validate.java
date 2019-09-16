@@ -3,6 +3,7 @@ import com.cg.movies.dao.*;
 import com.cg.movies.dto.Theatre;
 import com.cg.movies.exception.*;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.ArrayList;
 import java.util.List;
 public class Validate {
@@ -35,7 +36,7 @@ public class Validate {
 	        return true;
 	    }
 	    static boolean validate_duplicate(Theatre theatre) throws UserException {
-	        List<Map.Entry<Integer,Theatre>> temp = new ArrayList<>(dao.getTheatres().entrySet());
+	        List<Map.Entry<Integer,Theatre>> temp = new ArrayList<Entry<Integer, Theatre>>(dao.getTheatres().entrySet());
 	        for(int i=0;i<temp.size();i++){
 	            if(temp.get(i).getValue().equals(theatre)){
 	                theatre.setCount();

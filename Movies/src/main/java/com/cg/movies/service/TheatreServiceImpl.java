@@ -11,12 +11,12 @@ public class TheatreServiceImpl implements TheatreService {
 		
 	    private TheatreDao dao = new TheatreDaoImpl();
 
-		    @Override
+		    
 		    public Map<Integer, String> getCities() {
 		        return dao.getCities();
 		    }
 
-		    @Override
+		    
 		    public Map<Integer, Theatre> getTheatres() {
 		        return dao.getTheatres();
 		    }
@@ -24,7 +24,7 @@ public class TheatreServiceImpl implements TheatreService {
 		        return dao.getTheatres(option);
 		    }
 
-		    @Override
+		    
 		    public Theatre addTheatre(Theatre theatre) throws Exception {
 
 		        Validate.validate_theatre(theatre);
@@ -34,7 +34,7 @@ public class TheatreServiceImpl implements TheatreService {
 		        return theatre;
 		    }
 
-		    @Override
+		    
 		    public List<Theatre> getTheatres(Integer cityPincode) throws Exception {
 		        if(Validate.validate_Ids(cityPincode)){
 		           return dao.getTheatres(cityPincode);
@@ -42,7 +42,7 @@ public class TheatreServiceImpl implements TheatreService {
 		        return null;
 		    }
 
-		    @Override
+		    
 		    public Theatre searchTheatre(Integer theatreId) throws Exception {
 		        if(Validate.validate_Ids(theatreId)){
 		            return dao.searchTheatre(theatreId);
@@ -50,7 +50,7 @@ public class TheatreServiceImpl implements TheatreService {
 		        return null;
 		    }
 
-		    @Override
+		    
 		    public Theatre deleteTheatre(Integer theatreId) throws UserException {
 		        if(Validate.validate_Ids(theatreId)){
 		            return dao.deleteTheatre(theatreId);
@@ -58,7 +58,7 @@ public class TheatreServiceImpl implements TheatreService {
 		        return null;
 		    }
 
-		    @Override
+		    
 		    public Set<Movie> getMovies(Integer cityPincode) throws UserException {
 		        if(Validate.validate_Ids(cityPincode)){
 		            return dao.getMovies(cityPincode);
@@ -66,7 +66,7 @@ public class TheatreServiceImpl implements TheatreService {
 		        return null;
 		    }
 
-		    @Override
+		    
 		    public List<Movie> getMoviesinTheatre(Integer theatreId) throws Exception{
 		        if(Validate.validate_Ids(theatreId)){
 		            return dao.getMoviesinTheatre(theatreId);
@@ -74,7 +74,7 @@ public class TheatreServiceImpl implements TheatreService {
 		        return null;
 		    }
 
-		    @Override
+		    
 		    public Show addShow(Integer theatreId, Integer screenId, Show show) throws Exception {
 		        // TODO Auto-generated method stub
 		        if((Validate.validate_Ids(theatreId)&&(Validate.validate_Ids(screenId)))) {
@@ -85,7 +85,7 @@ public class TheatreServiceImpl implements TheatreService {
 
 
 
-		    @Override
+		    
 		    public Show deleteShow(Integer theatreId, Integer screenId, Integer showId) throws Exception {
 		        // TODO Auto-generated method stub
 		        if((Validate.validate_Ids(theatreId)&&(Validate.validate_Ids(screenId)))) {
@@ -97,7 +97,7 @@ public class TheatreServiceImpl implements TheatreService {
 
 
 
-		    @Override
+		    
 		    public Show updateShow(Integer theatreId,Integer screenId, Show show) throws Exception {
 		        // TODO Auto-generated method stub
 		        if(Validate.validate_Ids(theatreId)) {
@@ -108,7 +108,7 @@ public class TheatreServiceImpl implements TheatreService {
 
 
 
-		    @Override
+		    
 		    public List<String> getSeatsAvailability(Integer theatreId, Integer showId, String date) throws Exception {
 		        // TODO Auto-generated method stub
 		        if((!Validate.validate_Ids(theatreId)&&(!Validate.validate_Ids(showId)))) {
@@ -126,7 +126,7 @@ public class TheatreServiceImpl implements TheatreService {
 
 
 
-		    @Override
+		    
 		    public List<String> updateSeats(Integer theatreId, Integer showId, String date, List<String> seats) throws Exception{
 		        // TODO Auto-generated method stub
 		        if((Validate.validate_Ids(theatreId)&&(Validate.validate_Ids(showId)))) {
@@ -158,7 +158,7 @@ public class TheatreServiceImpl implements TheatreService {
 		        return null;
 		    }
 
-		    @Override
+		    
 		    public List<Screen> getScreensInTheatre(Integer theatreId) throws Exception {
 		        if(Validate.validate_Ids(theatreId)){
 		            return(dao.getScreensInTheatre(theatreId));
@@ -166,7 +166,7 @@ public class TheatreServiceImpl implements TheatreService {
 		        return null;
 		    }
 
-		    @Override
+		    
 		    public List<Show> getShowsInTheatre(Integer theatreId) throws Exception {
 		        if(Validate.validate_Ids(theatreId)){
 		            return dao.getShowsInTheatre(theatreId);
@@ -174,7 +174,7 @@ public class TheatreServiceImpl implements TheatreService {
 		        return null;
 		    }
 
-		    @Override
+		    
 		    public List<Show> getShowsInScreen(Integer theatreId, Integer screenId) throws Exception {
 		        if(Validate.validate_Ids(theatreId)&&Validate.validate_Ids(screenId)){
 		            return dao.getShowsInScreen(theatreId,screenId);
@@ -182,10 +182,10 @@ public class TheatreServiceImpl implements TheatreService {
 		        return null;
 		    }
 
-		    @Override
+		    
 		    public List<Show> getShowsForMovieInTheatre(Integer theatreId, Integer moviename) throws Exception {
 		        List<Show> shows=getShowsInTheatre(theatreId);
-		        List<Show> ret = new ArrayList<>();
+		        List<Show> ret = new ArrayList<Show>();
 		        for(int i=0;i<shows.size();i++){
 		            if(shows.get(i).getCurrentMovie().getMovieId().equals(moviename)){
 		                ret.add(shows.get(i));
@@ -194,9 +194,9 @@ public class TheatreServiceImpl implements TheatreService {
 		        return ret;
 		    }
 
-		    @Override
+		    
 		    public List<String> getAvailableSeats(Show show) throws Exception {
-		        List<String> seats=new ArrayList<>();
+		        List<String> seats=new ArrayList<String>();
 		        return null;
 		    }
 		}

@@ -4,46 +4,47 @@ import com.cg.movies.dto.Screen;
 import com.cg.movies.dto.Show;
 import com.cg.movies.dto.Theatre;
 import java.util.*;
+import java.util.Map.Entry;
 
 public class TheatreDaoImpl implements TheatreDao{
 
-		    private static Map<Integer, Theatre> theatres = new HashMap<>();
+		    private static Map<Integer, Theatre> theatres = new HashMap<Integer, Theatre>();
 
-		    @Override
+		    
 		    public Map<Integer,String> getCities() {
 
-		        Map<Integer,String> cities = new TreeMap<>();
-		        List<Map.Entry<Integer,Theatre>> temp = new ArrayList<>(theatres.entrySet());
+		        Map<Integer,String> cities = new TreeMap<Integer, String>();
+		        List<Map.Entry<Integer,Theatre>> temp = new ArrayList<Entry<Integer, Theatre>>(theatres.entrySet());
 		        for(int i=0;i<temp.size();i++){
 		            cities.put(temp.get(i).getValue().getCityPincode(),temp.get(i).getValue().getCityName());
 		        }
 		        return cities;
 		    }
 
-		    @Override
+		    
 		    public Map<Integer,Theatre> getTheatres() {
 		        return theatres;
 		    }
 		    
 		    public Map<Integer,String> getTheatres(int option) {
-		    	Map<Integer,String> theatreList = new TreeMap<>();
-		        List<Map.Entry<Integer,Theatre>> temp = new ArrayList<>(theatres.entrySet());
+		    	Map<Integer,String> theatreList = new TreeMap<Integer, String>();
+		        List<Map.Entry<Integer,Theatre>> temp = new ArrayList<Entry<Integer, Theatre>>(theatres.entrySet());
 		        for(int i=0;i<temp.size();i++){
 		            theatreList.put(temp.get(i).getValue().getTheatreId(),temp.get(i).getValue().getTheatreName());
 		        }
 		        return theatreList;
 		    }
 
-		    @Override
+		    
 		    public Theatre addTheatre(Theatre theatre) {
 		        theatres.put(theatre.getTheatreId(),theatre);
 		        return theatre;
 		    }
 
-		    @Override
+		    
 		    public List<Theatre> getTheatres(Integer cityPincode) {
-		        List<Theatre> theatreList = new LinkedList<>();
-		        List<Map.Entry<Integer,Theatre>> temp = new LinkedList<>(theatres.entrySet());
+		        List<Theatre> theatreList = new LinkedList<Theatre>();
+		        List<Map.Entry<Integer,Theatre>> temp = new LinkedList<Entry<Integer, Theatre>>(theatres.entrySet());
 		        for(int i=0;i<temp.size();i++){
 		            if(cityPincode.equals(temp.get(i).getValue().getCityPincode())){
 		                theatreList.add(temp.get(i).getValue());
@@ -52,13 +53,13 @@ public class TheatreDaoImpl implements TheatreDao{
 		        return theatreList;
 		    }
 
-		    @Override
+		    
 		    public Theatre searchTheatre(Integer theatreId) {
 		        Theatre theatre = theatres.get(theatreId);
 		        return theatre;
 		    }
 
-		    @Override
+		    
 		    public Theatre deleteTheatre(Integer theatreId) {
 		        Theatre theatre =theatres.get(theatreId);
 		        theatres.remove(theatreId);
@@ -70,9 +71,9 @@ public class TheatreDaoImpl implements TheatreDao{
 //		        return theatre;
 //		    }
 
-		    @Override
+		    
 		    public Set<Movie> getMovies(Integer cityPincode) {
-		        Set<Movie> ret = new HashSet<>();
+		        Set<Movie> ret = new HashSet<Movie>();
 		        List<Theatre> temp = getTheatres(cityPincode);
 		        for (int i=0;i<temp.size();i++){
 		            ret.addAll(temp.get(i).getMovies());
@@ -80,7 +81,7 @@ public class TheatreDaoImpl implements TheatreDao{
 		        return ret;
 		    }
 
-		    @Override
+		    
 		    public List<Movie> getMoviesinTheatre(Integer theatreId) {
 		        return theatres.get(theatreId).getMovies();
 		    }
@@ -93,7 +94,7 @@ public class TheatreDaoImpl implements TheatreDao{
 		        }
 		        return null;
 		    }
-		    @Override
+		    
 		    public Show addShow(Integer theatreId, Integer screenId, Show show) {
 		        Screen sc = searchScreen(theatreId,screenId);
 		        if(sc!=null){
@@ -105,7 +106,7 @@ public class TheatreDaoImpl implements TheatreDao{
 
 		    }
 
-		    @Override
+		    
 		    public Show deleteShow(Integer theatreId, Integer screenId, Integer showId) {
 		        Screen sc= searchScreen(theatreId,screenId);
 		        if(sc!=null){
@@ -140,14 +141,14 @@ public class TheatreDaoImpl implements TheatreDao{
 		    }
 
 
-		    @Override
+		    
 		    public Show updateShow(Integer theatreId,Integer screenId, Show show) {
 		        deleteShow(theatreId, screenId, show.getShowId());
 		        addShow(theatreId, screenId, show);
 		        return null;
 		    }
 
-		    @Override
+		    
 		    public List<String> getSeatsAvailability(Integer theatreId, Integer showId, Date date) {
 		        Show show = searchShow(theatreId, showId);
 		        if(show != null) {
@@ -156,7 +157,7 @@ public class TheatreDaoImpl implements TheatreDao{
 		        return null;
 		    }
 
-		    @Override
+		    
 		    public List<String> updateSeats(Integer theatreId, Integer showId, Date date,List<String> seats) {
 		        Show show = searchShow(theatreId, showId);
 		        //System.out.println(show);
@@ -172,9 +173,9 @@ public class TheatreDaoImpl implements TheatreDao{
 		        return seats;
 		    }
 
-		    @Override
+		    
 		    public List<Show> getShowsInTheatre(Integer theatreId) {
-		        List<Show> shows = new ArrayList<>();
+		        List<Show> shows = new ArrayList<Show>();
 		        List<Screen> screens = getScreensInTheatre(theatreId);
 		        for(int i=0;i<screens.size();i++){
 		            shows.addAll(screens.get(i).getShows());
@@ -182,9 +183,9 @@ public class TheatreDaoImpl implements TheatreDao{
 		        return shows;
 		    }
 
-		    @Override
+		    
 		    public List<Show> getShowsInScreen(Integer theatreId, Integer screenId) {
-		        List<Show> shows = new ArrayList<>();
+		        List<Show> shows = new ArrayList<Show>();
 		        for(int i=0;i<searchTheatre(theatreId).getScreens().size();i++){
 		            if(searchTheatre(theatreId).getScreens().get(i).getScreenId().equals(screenId)){
 		                shows.addAll(searchTheatre(theatreId).getScreens().get(i).getShows());
