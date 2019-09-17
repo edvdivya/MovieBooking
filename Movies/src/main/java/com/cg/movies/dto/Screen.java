@@ -2,26 +2,31 @@ package com.cg.movies.dto;
 import java.util.List;
 
 	public class Screen {
-	    private final Integer screenId;
-	    private final Integer rows;
-	    private final Integer columns;
-	    private List<Show> shows;
-	    private static Integer count=0;
+	    private Integer screenId;
+	    private Integer rows;
+	    private Integer columns;
+	    private Integer showid;
+	    private Integer theatreid;
+	    
 
 	    public Screen(Integer rows, Integer columns) {
-	        this.screenId = ++count;
+	        
 	        this.rows = rows;
 	        this.columns = columns;
 	    }
 
-	    public Screen(Integer rows, Integer columns, List<Show> shows) {
-	        this.screenId = ++count;
+	    public Screen(Integer rows, Integer columns, Integer showid,Integer theatreid) {
+	        
 	        this.rows = rows;
 	        this.columns = columns;
-	        this.shows = shows;
+	        this.showid = showid;
 	    }
 
-	    public Integer getScreenId() {
+	    public Screen() {
+			// TODO Auto-generated constructor stub
+		}
+
+		public Integer getScreenId() {
 	        return screenId;
 	    }
 
@@ -33,21 +38,49 @@ import java.util.List;
 	        return columns;
 	    }
 
-	    public List<Show> getShows() {
-	        return shows;
+	    public Integer getShows() {
+	        return showid;
 	    }
 
-	    public void setShows(List<Show> shows) {
-	        this.shows = shows;
+	    public void setShows(Integer showid) {
+	        this.showid = showid;
 	    }
 
-	    @Override
+	    public Integer getShowid() {
+			return showid;
+		}
+
+		public void setShowid(Integer showid) {
+			this.showid = showid;
+		}
+
+		public Integer getTheatreid() {
+			return theatreid;
+		}
+
+		public void setTheatreid(Integer theatreid) {
+			this.theatreid = theatreid;
+		}
+
+		public void setScreenId(Integer screenId) {
+			this.screenId = screenId;
+		}
+
+		public void setRows(Integer rows) {
+			this.rows = rows;
+		}
+
+		public void setColumns(Integer columns) {
+			this.columns = columns;
+		}
+
+		@Override
 	    public String toString() {
 	        return "Screen{" +
 	                "screenId=" + screenId +
 	                ", rows=" + rows +
 	                ", columns=" + columns +
-	                ", shows=" + shows +
+	                ", shows=" + showid +
 	                '}';
 	    }
 	}

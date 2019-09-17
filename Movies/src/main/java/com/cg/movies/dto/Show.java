@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Show {
 
-	private final Integer showId;
+	private Integer showId;
     private Movie currentMovie;
     private Date movieEndDate;
     private String language;

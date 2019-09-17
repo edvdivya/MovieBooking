@@ -11,8 +11,8 @@ public interface TheatreService {
 
 
 		public Map<Integer,String> getCities();
-	    public Map<Integer, Theatre> getTheatres();
-	    public Theatre addTheatre(Theatre theatre) throws Exception;
+	    public Map<Integer, Theatre> getTheatres() throws Exception;
+	    public Boolean addTheatre(Theatre theatre) throws Exception;
 	    public List<Theatre> getTheatres(Integer cityPincode) throws Exception;
 	    public Theatre searchTheatre(Integer theatreId) throws Exception;
 	    public Theatre deleteTheatre(Integer theatreId) throws Exception;
@@ -29,7 +29,10 @@ public interface TheatreService {
 	    public List<Show> getShowsInScreen(Integer theatreId, Integer screenId) throws Exception;
 	    public List<Show> getShowsForMovieInTheatre(Integer theatreId,Integer moviename) throws Exception;
 	    public List<String> getAvailableSeats(Show show) throws Exception;
-		Map<Integer, String> getTheatres(int option);
+		public Map<Integer, Theatre> getTheatres(int option) throws Exception;
+		public Boolean addMovie(Movie movie) throws Exception;
+		public Boolean addScreen(int i, int j, int theatreid) throws Exception;
+		public Map<Integer, Screen> getScreens(int theaterid) throws Exception;
 
 	}
 

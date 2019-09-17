@@ -1,12 +1,15 @@
 package com.cg.movies.ui;
-
 import com.cg.movies.dto.Movie;
+
 import com.cg.movies.dto.Screen;
 import com.cg.movies.dto.Show;
 import com.cg.movies.dto.Theatre;
 import com.cg.movies.service.*;
+
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Map.Entry;
 
 public class MyApplication {
 
@@ -38,20 +41,20 @@ public class MyApplication {
 		ArrayList<Movie> listofMovies = new ArrayList<Movie>();
 
 		try {
-			Movie movie1 = new Movie("Article 15", "Comedy Drama", "Rajkumar Hirani", 125, releaseDate, "English");
-			Movie movie2 = new Movie("Romeo Akbar Walter", "Thriller Drama", "SiddraJ Films", 195, releaseDate1,"Hindi");
-			listofMovies.add(movie1);
-			listofMovies.add(movie2);
-			Show showM11 = new Show(movie1, movieEndDate, "English", showStartTimeSM11, showEndTimeSM11, bookedSeats);
-			Show showM12 = new Show(movie1, movieEndDate, "English", showStartTimeSM12, showEndTimeSM12, bookedSeats);
-			Show showM21 = new Show(movie2, movieEndDate, "English", showStartTimeSM21, showEndTimeSM21, bookedSeats);
-			Show showM22 = new Show(movie2, movieEndDate, "English", showStartTimeSM22, showEndTimeSM22, bookedSeats);
-			Show showM23 = new Show(movie2, movieEndDate, "English", showStartTimeSM23, showEndTimeSM23, bookedSeats);
-			listofShowsMovie1.add(showM11);
-			listofShowsMovie1.add(showM12);
-			listofShowsMovie2.add(showM21);
-			listofShowsMovie2.add(showM22);
-			listofShowsMovie2.add(showM23);
+//			Movie movie1 = new Movie("Article 15", "Comedy Drama", "Rajkumar Hirani", 125, releaseDate, "English");
+//			Movie movie2 = new Movie("Romeo Akbar Walter", "Thriller Drama", "SiddraJ Films", 195, releaseDate1,"Hindi");
+//			listofMovies.add(movie1);
+//			listofMovies.add(movie2);
+//			Show showM11 = new Show(movie1, movieEndDate, "English", showStartTimeSM11, showEndTimeSM11, bookedSeats);
+//			Show showM12 = new Show(movie1, movieEndDate, "English", showStartTimeSM12, showEndTimeSM12, bookedSeats);
+//			Show showM21 = new Show(movie2, movieEndDate, "English", showStartTimeSM21, showEndTimeSM21, bookedSeats);
+//			Show showM22 = new Show(movie2, movieEndDate, "English", showStartTimeSM22, showEndTimeSM22, bookedSeats);
+//			Show showM23 = new Show(movie2, movieEndDate, "English", showStartTimeSM23, showEndTimeSM23, bookedSeats);
+//			listofShowsMovie1.add(showM11);
+//			listofShowsMovie1.add(showM12);
+//			listofShowsMovie2.add(showM21);
+//			listofShowsMovie2.add(showM22);
+//			listofShowsMovie2.add(showM23);
 		} catch (Exception e) {
 			System.out.println("Check date format");
 
@@ -59,22 +62,26 @@ public class MyApplication {
 		ArrayList<Screen> listofScreensT1 = new ArrayList<Screen>();
 		ArrayList<Screen> listofScreensT2 = new ArrayList<Screen>();
 		ArrayList<Screen> listofScreensT3 = new ArrayList<Screen>();
-		Screen screenT11 = new Screen(10, 10, listofShowsMovie1);
-		Screen screenT21 = new Screen(10, 10, listofShowsMovie2);
-		Screen screenT22 = new Screen(10, 10, listofShowsMovie1);
-		Screen screenT31 = new Screen(10, 10, listofShowsMovie2);
-		Screen screenT32 = new Screen(10, 10, listofShowsMovie2);
-		listofScreensT1.add(screenT11);
-		listofScreensT2.add(screenT21);
-		listofScreensT2.add(screenT22);
-		listofScreensT3.add(screenT31);
-		listofScreensT3.add(screenT32);
-		Theatre theatre1 = new Theatre("Elante Mall", 160087, "kurnool", "Chandigarh",listofScreensT1, listofMovies);
-		Theatre theatre2 = new Theatre("Wave Cinemas", 160023, "Chandigarh", "Chandigarh",listofScreensT2, listofMovies);
-		Theatre theatre3 = new Theatre("Saket CityMall", 140078, "Delhi", "Chandigarh",listofScreensT3, listofMovies);
-		service.addTheatre(theatre1);
-		service.addTheatre(theatre2);
-		service.addTheatre(theatre3);
+//		Screen screenT11 = new Screen(10, 10, listofShowsMovie1);
+//		Screen screenT21 = new Screen(10, 10, listofShowsMovie2);
+//		Screen screenT22 = new Screen(10, 10, listofShowsMovie1);
+//		Screen screenT31 = new Screen(10, 10, listofShowsMovie2);
+//		Screen screenT32 = new Screen(10, 10, listofShowsMovie2);
+//		listofScreensT1.add(screenT11);
+//		listofScreensT2.add(screenT21);
+//		listofScreensT2.add(screenT22);
+//		listofScreensT3.add(screenT31);
+//		listofScreensT3.add(screenT32);
+//		Theatre theatre1 = new Theatre("Elante Mall", 160087, "Chandigarh",listofScreensT1, listofMovies);
+//		Theatre theatre2 = new Theatre("Wave Cinemas", 160023, "Chandigarh",listofScreensT2, listofMovies);
+//		Theatre theatre3 = new Theatre("Saket CityMall", 140078, "Chandigarh",listofScreensT3, listofMovies);
+//		Theatre theatre1 = new Theatre("Elante Mall", 160087, "Chandigarh","null","null");
+//		Theatre theatre2 = new Theatre("Wave Cinemas", 160023, "Chandigarh","null","null");
+//		Theatre theatre3 = new Theatre("Saket CityMall", 140078, "Chandigarh","null", "null");
+
+//		service.addTheatre(theatre1);
+//		service.addTheatre(theatre2);
+//		service.addTheatre(theatre3);
 		Scanner scanner = new Scanner(System.in);
 		int count = 2;
 		while ((count--) > 0) {
@@ -101,14 +108,9 @@ public class MyApplication {
 
 				case 1:
 					// show theater list
-					System.out.println(service.getTheatres(5));
-
-					// add 2 validations here one for theatre id input and other for movie details
-
+					service.getTheatres();
 					System.out.println("Enter The Theater Id to which you want to add movie: ");
 					int theaterid = scanner.nextInt();
-					// method call with theater Id
-
 					System.out.println("Enter the Movie Details as asked: ");
 					scanner.nextLine();
 					System.out.println("Enter the movie name");
@@ -124,36 +126,20 @@ public class MyApplication {
 					Date date = sdf.parse(scanner.nextLine());
 					System.out.println("Enter the movie language");
 					String language = scanner.nextLine();
-
-					Movie movie = new Movie(name, genre, director, movieLength, date, language);
-
-					Show show = new Show(movie, sdf.parse("2019-06-28"), language, sdf1.parse("12:05:00"),sdf1.parse("3:05:00"), bookedSeats);
-					System.out.println(service.getScreensInTheatre(theaterid).size() + " Screens exist");
-					System.out.println("Existing Screen Id are: ");
-					for (int i = 0; i < service.getScreensInTheatre(theaterid).size(); i++) {
-						System.out.println(service.getScreensInTheatre(theaterid).get(i).getScreenId());
-					}
-					System.out.println("Enter the screen you want to add movie to: ");
-					// increment should be for each theatre
-					int numberofMovies = service.getMoviesinTheatre(theaterid).size();
-					service.addShow(theaterid, scanner.nextInt(), show);
-					int updatedNumberofMovies = service.getMoviesinTheatre(theaterid).size();
-					if (updatedNumberofMovies > numberofMovies) {
+					Movie movie = new Movie(name, genre, director, movieLength, date, language,theaterid);
+					System.out.println("");
+					try {
+						service.addMovie(movie);
 						System.out.println("Movie Added");
-					for (int i = 0; i < service.getMoviesinTheatre(theaterid).size(); i++) {
-						System.out.println(service.getMoviesinTheatre(theaterid).get(i).getMovieId() + " "
-								+ service.getMoviesinTheatre(theaterid).get(i).getMovieName());
-						}
+						//System.out.println(service.getScreens(theaterid));
+						//System.out.println("ScreenId to add movie");
+					} catch (Exception exception) {
+						System.out.println(exception.getMessage());
 					}
-					else {
-						System.out.println("Movie could not be added");
-					}
-
-					scanner.nextLine();
-
+					
 					break;
 				case 2:
-					System.out.println(service.getTheatres(5));
+					service.getTheatres();
 					System.out.println("Enter the theatre Id to remove Movie: ");
 					int theatreId = scanner.nextInt();
 					for (int i = 0; i < service.getMoviesinTheatre(theatreId).size(); i++) {
@@ -174,19 +160,32 @@ public class MyApplication {
 					scanner.nextLine();
 					break;
 				case 3:
+					System.out.println("Enter the Theatre Details as asked: ");
+					scanner.nextLine();
+					System.out.println("Enter the Theatre name");
+					String theatreName = scanner.nextLine();
+					System.out.println("Enter the Theatre City");
+					String theatreCity = scanner.nextLine();
+					System.out.println("Enter the City Pincode");
+					Integer city_pincode = scanner.nextInt();
+					System.out.println("Enter the number of screens in theatre ");
+					Integer screens = scanner.nextInt();
+					scanner.nextLine();
+					Theatre theatre = new Theatre(theatreName,theatreCity,city_pincode,screens);
 					System.out.println("");
 					try {
-						service.addTheatre(new Theatre("Elante", 160087, "rajmundry", "Chandigarh",listofScreensT1, listofMovies));
+						service.addTheatre(theatre);
+//						int theatreid=theatre.getTheatreId();
+//						System.out.println(theatreid);
+//						for(int i=0;i<screens;i++) {
+//							service.addScreen(5,5,theatreid);
+//						}
+						
 					} catch (Exception exception) {
 						System.out.println(exception.getMessage());
 					}
 					break;
 				case 4:
-					// show list of movies
-					List<Map.Entry<Integer, Theatre>> theatres = new ArrayList<>(service.getTheatres().entrySet());
-					for (int i = 0; i < theatres.size(); i++) {
-						System.out.println(theatres.get(i).getValue());
-					}
 					System.out.println("Enter the theatre id");
 					service.deleteTheatre(scanner.nextInt());
 					break;
@@ -197,14 +196,9 @@ public class MyApplication {
 					}
 					break;
 				case 6:
-					// show list of Theaters(optional to show movies in each theaters)
-					Map<Integer, Theatre> theatresm = service.getTheatres();
-					List<Map.Entry<Integer, Theatre>> theatreList = new ArrayList<>(theatresm.entrySet());
-					for (int i = 0; i < theatreList.size(); i++) {
-						System.out.println(theatreList.get(i).getValue());
-					}
+					service.getTheatres();
 					break;
-
+				
 				case 7:
 					exit(1);
 

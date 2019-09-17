@@ -3,30 +3,34 @@ import java.util.Date;
 import java.util.Objects;
 
 	public class Movie {
-		private final Integer movieId;
-		private final String movieName;
-		private final String genre;
-		private final String director;
-		private final Integer movieLength;
-		private final Date movieReleaseDate;
-		private final String language;
-		private static Integer count = 0;
+		private Integer movieId;
+		private String movieName;
+		private String genre;
+		private String director;
+		private Integer movieLength;
+		private Date movieReleaseDate;
+		private String language;
+		private Integer theaterid;
+		
 
 		public Movie(String movieName, String genre, String director, Integer movieLength, Date movieReleaseDate,
-				String language) {
-			this.movieId = ++count;
+				String language, Integer theaterid) {
+			
 			this.movieName = movieName;
 			this.genre = genre;
 			this.director = director;
 			this.movieLength = movieLength;
 			this.movieReleaseDate = movieReleaseDate;
 			this.language = language;
+			this.theaterid=theaterid;
 		}
 
 		public Integer getMovieId() {
 			return movieId;
 		}
-
+		public Integer getTheatreId() {
+			return theaterid;
+		}
 		public String getMovieName() {
 			return movieName;
 		}
@@ -37,6 +41,42 @@ import java.util.Objects;
 
 		public String getDirector() {
 			return director;
+		}
+
+		public Integer getTheatreid() {
+			return theaterid;
+		}
+
+		public void setTheatreid(Integer theatreid) {
+			this.theaterid = theatreid;
+		}
+
+		public void setMovieId(Integer movieId) {
+			this.movieId = movieId;
+		}
+
+		public void setMovieName(String movieName) {
+			this.movieName = movieName;
+		}
+
+		public void setGenre(String genre) {
+			this.genre = genre;
+		}
+
+		public void setDirector(String director) {
+			this.director = director;
+		}
+
+		public void setMovieLength(Integer movieLength) {
+			this.movieLength = movieLength;
+		}
+
+		public void setMovieReleaseDate(Date movieReleaseDate) {
+			this.movieReleaseDate = movieReleaseDate;
+		}
+
+		public void setLanguage(String language) {
+			this.language = language;
 		}
 
 		public Integer getMovieLength() {
@@ -51,9 +91,6 @@ import java.util.Objects;
 			return language;
 		}
 
-		public static Integer getCount() {
-			return count;
-		}
 
 		@Override
 		public boolean equals(Object o) {
@@ -71,14 +108,14 @@ import java.util.Objects;
 		@Override
 		public int hashCode() {
 			return Objects.hash(getMovieName(), getGenre(), getDirector(), getMovieLength(), getMovieReleaseDate(),
-					getLanguage());
+					getLanguage(),getTheatreid());
 		}
 
 		@Override
 		public String toString() {
-			return "Movie{" + "movieId=" + movieId + ", movieName='" + movieName + '\'' + ", genre='" + genre + '\''
-					+ ", director='" + director + '\'' + ", movieLength=" + movieLength + ", movieReleaseDate="
-					+ movieReleaseDate + ", language='" + language + '\'' + '}';
+			return "Movie [movieId=" + movieId + ", movieName=" + movieName + ", genre=" + genre + ", director="
+					+ director + ", movieLength=" + movieLength + ", movieReleaseDate=" + movieReleaseDate
+					+ ", language=" + language + ", theatreid=" + theaterid + "]";
 		}
 	}
 

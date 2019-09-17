@@ -17,21 +17,20 @@ public class TheatreServiceImpl implements TheatreService {
 		    }
 
 		    @Override
-		    public Map<Integer, Theatre> getTheatres() {
+		    public Map<Integer, Theatre> getTheatres() throws Exception {
 		        return dao.getTheatres();
 		    }
-		    public Map<Integer, String> getTheatres(int option) {
+		    public Map<Integer, Theatre> getTheatres(int option) throws Exception {
 		        return dao.getTheatres(option);
 		    }
 
 		    @Override
-		    public Theatre addTheatre(Theatre theatre) throws Exception {
-
-		        Validate.validate_theatre(theatre);
-		        if(!Validate.validate_duplicate(theatre)){
-		            return dao.addTheatre(theatre);
+		    public Boolean addTheatre(Theatre theatre) throws Exception {
+		        if(Validate.validate_theatre(theatre)) {
+		        	return dao.addTheatre(theatre);
 		        }
-		        return theatre;
+		        return false;
+		            
 		    }
 
 		    @Override
@@ -199,6 +198,28 @@ public class TheatreServiceImpl implements TheatreService {
 		        List<String> seats=new ArrayList<>();
 		        return null;
 		    }
+
+			@Override
+		
+			  public Boolean addMovie(Movie movie) throws Exception {
+			        if(Validate.validate_movie(movie)) {
+			        	return dao.addMovie(movie);
+			        }
+			        return false;
+			            
+			    }
+
+			@Override
+			public Boolean addScreen(int i, int j,int theatreid) throws Exception {
+				return dao.addScreen(i,j,theatreid);
+				
+			}
+
+			@Override
+			public Map<Integer,Screen> getScreens(int theaterid) throws Exception {
+				// TODO Auto-generated method stub
+				return dao.getScreens(theaterid);
+			}
 		}
 
 

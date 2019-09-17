@@ -1,5 +1,6 @@
 package com.cg.movies.service;
 import com.cg.movies.dao.*;
+import com.cg.movies.dto.Movie;
 import com.cg.movies.dto.Theatre;
 import com.cg.movies.exception.*;
 import java.util.Map;
@@ -10,37 +11,32 @@ public class Validate {
 	    private static TheatreDao dao = new TheatreDaoImpl();
 
 	    static boolean validate_theatre(Theatre theatre) throws UserException {
-	        String str=""+theatre.getTheatreId();
-	        try{
-	            Integer.parseInt(str);
-	        }
-	        catch(Exception e){
-	            theatre.setCount();
-	            throw new UserException("Integer contains only numbers");
-	        }
+	        String str;
 	        str=""+theatre.getCityPincode();
 	        if(!str.matches("\\d+")){
-	            theatre.setCount();
-	            throw new UserException("city pincode contains only digits");
+	            throw new UserException("Exception Occured: City pincode contains only digits");
 	        }
 	        
 	        if(!theatre.getCityName().matches("[a-zA-Z]+")){
-	            theatre.setCount();
-	            throw new UserException("city name can not have special charecters");
+	            throw new UserException("Exception Occured: City name can not have special charecters");
+	        }
+	        str=""+theatre.getScreens();
+	        if(!str.matches("\\d+")){
+	            throw new UserException("Exception Occured: Only digits allowed");
 	        }
 	        return true;
 	    }
-	    static boolean validate_duplicate(Theatre theatre) throws UserException {
-	        List<Map.Entry<Integer,Theatre>> temp = new ArrayList<>(dao.getTheatres().entrySet());
-	        for(int i=0;i<temp.size();i++){
-	            if(temp.get(i).getValue().equals(theatre)){
-	                theatre.setCount();
-	                throw new UserException("Theatre already exists");
-	            }
+	    static boolean validate_movie(Movie movie) throws UserException {
+	        String str;  
+	        if(!movie.getDirector().matches("[a-zA-Z]") && !movie.getGenre().matches("[a-zA-Z]") && !movie.getLanguage().matches("[a-zA-Z]")){
+	            throw new UserException("Exception Occured: Only Characters allowed in genre, director name and language");
 	        }
-	        return false;
+	        str=""+movie.getMovieLength();
+	        if(!str.matches("\\d+")){
+	            throw new UserException("Exception Occured: Only digits allowed in length");
+	        }
+	        return true;
 	    }
-	    // it can be used for all id verification
 	    static boolean validate_Ids(Integer id) throws UserException {
 	        String str=""+id;
 	        if(!str.matches("\\d+")){

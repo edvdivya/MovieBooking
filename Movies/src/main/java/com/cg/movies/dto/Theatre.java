@@ -4,38 +4,36 @@ import java.util.List;
 
 public class Theatre {
 	
-	    private final Integer theatreId;
-	    private final String theatreName;
-	    private final Integer cityPincode;
-	    private final String cityName;
-	    private final String theatreLocation;
-	    private List<Screen> screens;
-	    private List<Movie> movies;
-	    private static Integer count=0;
+	    private Integer theatreId;
+	    private String theatreName;
+	    private Integer cityPincode;
+	    private String cityName;
+	    private Integer screens;	   
 
-	    public Theatre(String theatreName, Integer cityPincode,
-	                   String cityName, String theatreLocation, String managerName,
-	                   String managerContact) {
-	        this.theatreId = ++count;
+
+	    public Theatre(Integer theatreId,String theatreName, String cityName, Integer cityPincode, Integer screens) {
+	        this.theatreId = theatreId;
 	        this.theatreName = theatreName;
 	        this.cityPincode = cityPincode;
 	        this.cityName = cityName;
-	        this.theatreLocation = theatreLocation;
-
-	    }
-
-	    public Theatre(String theatreName, Integer cityPincode, String cityName,
-	                   String theatreLocation, List<Screen> screens, List<Movie> movies) {
-	        this.theatreId = ++count;
-	        this.theatreName = theatreName;
-	        this.cityPincode = cityPincode;
-	        this.cityName = cityName;
-	        this.theatreLocation = theatreLocation;
 	        this.screens = screens;
-	        this.movies = movies;
+	        
 	    }
 
-	    public Integer getTheatreId() {
+	    public Theatre() {
+			// TODO Auto-generated constructor stub
+		}
+
+		public Theatre(String theatreName2, String theatreCity, Integer city_pincode, Integer screens2) {
+			// TODO Auto-generated constructor stub
+			   
+		        this.theatreName = theatreName2;
+		        this.cityPincode = city_pincode;
+		        this.cityName = theatreCity;
+		        this.screens = screens2;
+		}
+
+		public Integer getTheatreId() {
 	        return theatreId;
 	    }
 
@@ -51,33 +49,28 @@ public class Theatre {
 	        return cityName;
 	    }
 
-	    public String getTheatreLocation() {
-	        return theatreLocation;
-	    }
-
-	    
-	    public List<Screen> getScreens() {
+	    public Integer getScreens() {
 	        return screens;
 	    }
-
-	    public void setScreens(List<Screen> screens) {
+	    
+	    public void setTheatreId(Integer theatreId) {
+	        this.theatreId = theatreId;
+	    }
+	    
+	    public void setTheatreName(String theatreName) {
+	        this.theatreName = theatreName;
+	    }
+	    
+	    public void setCityName(String cityName) {
+	        this.cityName = cityName;
+	    }
+	   
+	    public void setCityPincode(Integer cityPincode) {
+	        this.cityPincode = cityPincode;
+	    }
+	   
+	    public void setScreens(Integer screens) {
 	        this.screens = screens;
-	    }
-
-	    public List<Movie> getMovies() {
-	        return movies;
-	    }
-
-	    public void setMovies(List<Movie> movies) {
-	        this.movies = movies;
-	    }
-
-	    public static Integer getCount() {
-	        return count;
-	    }
-
-	    public void setCount() {
-	        count--;
 	    }
 
 	    @Override
@@ -86,9 +79,7 @@ public class Theatre {
 	        int result = 1;
 	        result = prime * result + ((cityName == null) ? 0 : cityName.hashCode());
 	        result = prime * result + ((cityPincode == null) ? 0 : cityPincode.hashCode());
-	        result = prime * result + ((movies == null) ? 0 : movies.hashCode());
 	        result = prime * result + ((screens == null) ? 0 : screens.hashCode());
-	        result = prime * result + ((theatreLocation == null) ? 0 : theatreLocation.hashCode());
 	        result = prime * result + ((theatreName == null) ? 0 : theatreName.hashCode());
 	        return result;
 	    }
@@ -112,20 +103,10 @@ public class Theatre {
 	                return false;
 	        } else if (!cityPincode.equals(other.cityPincode))
 	            return false;
-	        if (movies == null) {
-	            if (other.movies != null)
-	                return false;
-	        } else if (!movies.equals(other.movies))
-	            return false;
 	        if (screens == null) {
 	            if (other.screens != null)
 	                return false;
 	        } else if (!screens.equals(other.screens))
-	            return false;
-	        if (theatreLocation == null) {
-	            if (other.theatreLocation != null)
-	                return false;
-	        } else if (!theatreLocation.equals(other.theatreLocation))
 	            return false;
 	        if (theatreName == null) {
 	            if (other.theatreName != null)
@@ -142,9 +123,7 @@ public class Theatre {
 	                ", theatreName='" + theatreName + '\'' +
 	                ", cityPincode=" + cityPincode +
 	                ", cityName='" + cityName + '\'' +
-	                ", theatreLocation='" + theatreLocation + '\'' +
 	                ", screens=" + screens +
-	                ", movies=" + movies +
 	                '}';
 	    }
 	}

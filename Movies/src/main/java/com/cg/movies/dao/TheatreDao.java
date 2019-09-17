@@ -8,12 +8,13 @@ import com.cg.movies.dto.Movie;
 import com.cg.movies.dto.Screen;
 import com.cg.movies.dto.Show;
 import com.cg.movies.dto.Theatre;
+import com.cg.movies.exception.MyException;
 public interface TheatreDao {
 
 
 		public Map<Integer,String> getCities();
-	    public Map<Integer,Theatre> getTheatres();
-	    public Theatre addTheatre(Theatre theatre);
+	    public Map<Integer, Theatre> getTheatres() throws Exception;
+	    public Boolean addTheatre(Theatre theatre) throws Exception;
 	    public List<Theatre> getTheatres(Integer cityPincode);
 	    public Theatre searchTheatre(Integer theatreId);
 	    public Theatre deleteTheatre(Integer theatreId);
@@ -29,7 +30,10 @@ public interface TheatreDao {
 	    public List<Screen> getScreensInTheatre(Integer theatreId);
 	    public List<Show> getShowsInTheatre(Integer theatreId);
 	    public List<Show> getShowsInScreen(Integer theatreId,Integer screenId);
-		Map<Integer, String> getTheatres(int option);
+		public Map<Integer, Theatre> getTheatres(int option) throws Exception;
+		public Boolean addMovie(Movie movie) throws Exception;
+		public Boolean addScreen(int i, int j,int theatreid) throws MyException;
+		public Map<Integer, Screen> getScreens(int theatreid) throws Exception;
 	}
 
 
