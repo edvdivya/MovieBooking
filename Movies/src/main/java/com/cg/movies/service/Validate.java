@@ -1,6 +1,7 @@
 package com.cg.movies.service;
 import com.cg.movies.dao.*;
 import com.cg.movies.dto.Movie;
+import com.cg.movies.dto.Show;
 import com.cg.movies.dto.Theatre;
 import com.cg.movies.exception.*;
 import java.util.Map;
@@ -19,10 +20,6 @@ public class Validate {
 	        
 	        if(!theatre.getCityName().matches("[a-zA-Z]+")){
 	            throw new UserException("Exception Occured: City name can not have special charecters");
-	        }
-	        str=""+theatre.getScreens();
-	        if(!str.matches("\\d+")){
-	            throw new UserException("Exception Occured: Only digits allowed");
 	        }
 	        return true;
 	    }
@@ -50,6 +47,10 @@ public class Validate {
 	        }
 	        return false;
 	    }
+		public static boolean validate_show(Show show) {
+			System.out.println("Show date");
+			return false;
+		}
 	}
 
 

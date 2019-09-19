@@ -1,4 +1,4 @@
-package com.cg.movies.dto;
+ package com.cg.movies.dto;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,105 +10,156 @@ import java.util.Map;
 public class Show {
 
 	private Integer showId;
-    private Movie currentMovie;
-    private Date movieEndDate;
-    private String language;
-    private Date showStartTime;
-    private Date showEndTime;
-    private Map<Date,List<String>> bookedSeats;
+    private Integer movieId;
+    private Integer theatreId;
+    private Integer availableSeats;
+    private Integer bookedSeats;
+    private Date showDate;
+    private Date showTimings;
     
-    private static int count=0;
-
-    public Show(Movie currentMovie, Date movieEndDate, String language, Date showStartTime,
-                Date showEndTime, Map<Date,List<String>> bookedSeats) throws Exception {
-        this.showId=++count;
-        this.currentMovie = currentMovie;
-        this.movieEndDate = movieEndDate;
-        this.language = language;
-        this.showStartTime = showStartTime;
-        this.showEndTime = showEndTime;
-
+    public Show(Integer showId,Integer movieId,Integer theatreId,Integer bookedSeats,Integer availableSeats,Date showDate,Date showTimings ) throws Exception {
+        this.showId=showId;
+        this.movieId = movieId;
+        this.theatreId = theatreId;
         this.bookedSeats = bookedSeats;
-        String str="2019-07-";
-        SimpleDateFormat sdf=  new SimpleDateFormat("yyyy-MM-dd");
-        for(int i=5;i<=10;i++){
-            str="2019-07-"+i;
-            //this.bookedSeats.put(sdf.parse(str),new ArrayList<>());
-        }
-    
+        this.availableSeats = availableSeats;
+        this.showDate = showDate;
+        this.showTimings = showTimings;
+    }
+    public Show(Integer movieId,Integer theatreId,Integer bookedSeats,Integer availableSeats,Date showDate,Date showTimings ) throws Exception {
+        this.movieId = movieId;
+        this.theatreId = theatreId;
+        this.bookedSeats = bookedSeats;
+        this.availableSeats = availableSeats;
+        this.showDate = showDate;
+        this.showTimings = showTimings;
     }
 
     public Integer getShowId() {
         return showId;
     }
 
-    public Movie getCurrentMovie() {
-        return currentMovie;
-    }
+	public Integer getMovieId() {
+		return movieId;
+	}
 
-    public void setCurrentMovie(Movie currentMovie) {
-        this.currentMovie = currentMovie;
-    }
+	public void setMovieId(Integer movieId) {
+		this.movieId = movieId;
+	}
 
-    public Date getMovieEndDate() {
-        return movieEndDate;
-    }
+	public Integer getTheatreId() {
+		return theatreId;
+	}
 
-    public void setMovieEndDate(Date movieEndDate) {
-        this.movieEndDate = movieEndDate;
-    }
+	public void setTheatreId(Integer theatreId) {
+		this.theatreId = theatreId;
+	}
 
-    public String getLanguage() {
-        return language;
-    }
+	public Integer getAvailableSeats() {
+		return availableSeats;
+	}
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
+	public void setAvailableSeats(Integer availableSeats) {
+		this.availableSeats = availableSeats;
+	}
 
-    public Date getShowStartTime() {
-        return showStartTime;
-    }
+	public Integer getBookedSeats() {
+		return bookedSeats;
+	}
 
-    public void setShowStartTime(Date showStartTime) {
-        this.showStartTime = showStartTime;
-    }
+	public void setBookedSeats(Integer bookedSeats) {
+		this.bookedSeats = bookedSeats;
+	}
 
-    public Date getShowEndTime() {
-        return showEndTime;
-    }
+	public Date getShowDate() {
+		return showDate;
+	}
 
-    public void setShowEndTime(Date showEndTime) {
-        this.showEndTime = showEndTime;
-    }
+	public void setShowDate(Date showDate) {
+		this.showDate = showDate;
+	}
 
+	public Date getShowTimings() {
+		return showTimings;
+	}
 
+	public void setShowTimings(Date showTimings) {
+		this.showTimings = showTimings;
+	}
 
-    public Map<Date, List<String>> getBookedSeats() {
-        return bookedSeats;
-    }
+	public void setShowId(Integer showId) {
+		this.showId = showId;
+	}
 
-    public void setBookedSeats(Map<Date,List<String>> bookedSeats) {
-        this.bookedSeats = bookedSeats;
-    }
+	@Override
+	public String toString() {
+		return "Show [showId=" + showId + ", movieId=" + movieId + ", theatreId=" + theatreId + ", availableSeats="
+				+ availableSeats + ", bookedSeats=" + bookedSeats + ", showDate=" + showDate + ", showTimings="
+				+ showTimings + "]";
+	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((availableSeats == null) ? 0 : availableSeats.hashCode());
+		result = prime * result + ((bookedSeats == null) ? 0 : bookedSeats.hashCode());
+		result = prime * result + ((movieId == null) ? 0 : movieId.hashCode());
+		result = prime * result + ((showDate == null) ? 0 : showDate.hashCode());
+		result = prime * result + ((showId == null) ? 0 : showId.hashCode());
+		result = prime * result + ((showTimings == null) ? 0 : showTimings.hashCode());
+		result = prime * result + ((theatreId == null) ? 0 : theatreId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Show other = (Show) obj;
+		if (availableSeats == null) {
+			if (other.availableSeats != null)
+				return false;
+		} else if (!availableSeats.equals(other.availableSeats))
+			return false;
+		if (bookedSeats == null) {
+			if (other.bookedSeats != null)
+				return false;
+		} else if (!bookedSeats.equals(other.bookedSeats))
+			return false;
+		if (movieId == null) {
+			if (other.movieId != null)
+				return false;
+		} else if (!movieId.equals(other.movieId))
+			return false;
+		if (showDate == null) {
+			if (other.showDate != null)
+				return false;
+		} else if (!showDate.equals(other.showDate))
+			return false;
+		if (showId == null) {
+			if (other.showId != null)
+				return false;
+		} else if (!showId.equals(other.showId))
+			return false;
+		if (showTimings == null) {
+			if (other.showTimings != null)
+				return false;
+		} else if (!showTimings.equals(other.showTimings))
+			return false;
+		if (theatreId == null) {
+			if (other.theatreId != null)
+				return false;
+		} else if (!theatreId.equals(other.theatreId))
+			return false;
+		return true;
+	}
+	
     
-    public static int getCount() {
-        return count;
-    }
-
-    @Override
-    public String toString() {
-        return "Show{" +
-                "showId=" + showId +
-                ", currentMovie=" + currentMovie +
-                ", movieEndDate=" + movieEndDate +
-                ", language='" + language + '\'' +
-                ", showStartTime=" + showStartTime +
-                ", showEndTime=" + showEndTime +
-                '}';
-    }
-
 }
 
-	
+    

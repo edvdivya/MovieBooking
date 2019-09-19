@@ -1,14 +1,11 @@
 package com.cg.movies.dao;
 import com.cg.movies.exception.MyException;
-
 import com.cg.movies.util.DBUtil;
 import com.cg.movies.dto.*;
 import com.cg.movies.exception.*;
 import com.cg.movies.dto.Movie;
-import com.cg.movies.dto.Screen;
 import com.cg.movies.dto.Show;
 import com.cg.movies.dto.Theatre;
-
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -44,6 +41,7 @@ public class TheatreDaoImpl implements TheatreDao{
 		}
 	}
 		    private static Map<Integer, Theatre> theatres = new HashMap<>();
+		    
 
 		    @Override
 		    public Map<Integer,String> getCities() {
@@ -88,34 +86,8 @@ public class TheatreDaoImpl implements TheatreDao{
 //		    		}
 		    		return null;
 		    	}
-//		    
-//		    public List<Theatre> getTheatres() throws Exception {
-//				String sql = "Select * from theatre where delete_flag=0";
-//				List<Theatre> theatreList = new ArrayList<Theatre>();
-//				try {
-//					ps = connection.prepareStatement(sql);
-//					rs = ps.executeQuery();
-//					while (rs.next()) {
-//						Theatre theatre = new Theatre();
-//						theatre.setTheatreId(rs.getInt("theatre_id"));
-//						theatre.setTheatreName(rs.getString("theatre_name"));
-//						theatre.setCityName(rs.getString("theatre_city"));
-//					}
-//				} catch (SQLException e) {
-//					System.out.println("Exception occured at listTheatres dao method: "+e);
-//				} finally {
-//					if (ps != null) {
-//						try {
-//							ps.close();
-//						} catch (SQLException e1) {
-//							System.out.println(" 2nd Error at list theatres dao method");
-//						}
-//					}
-//
-//					return theatreList;
-//				}
-//			}
-//		    
+
+	/* author divya */
 		    public Map<Integer,Theatre> getTheatres() throws Exception {
 					String sql = "Select * from theatre";
 					Map<Integer,Theatre> theatremap = new HashMap<Integer,Theatre>();
@@ -128,7 +100,6 @@ public class TheatreDaoImpl implements TheatreDao{
 							theatre.setTheatreName(rs.getString("theatre_name"));
 							theatre.setCityName(rs.getString("theatre_city"));
 		    				theatre.setCityPincode(rs.getInt("city_pincode"));
-		    				theatre.setScreens(rs.getInt("screens"));
 							theatremap.put(rs.getInt("theatre_id"), theatre);
 							System.out.println(theatre);
 						}
@@ -152,7 +123,7 @@ public class TheatreDaoImpl implements TheatreDao{
 				// TODO Auto-generated method stub
 				int noOfRec = 0;
 				System.out.println(theatre);
-				String sql = "insert into theatre(theatre_name,theatre_city,city_pincode,screens,delete_flag) values(?,?,?,?,?)";
+				String sql = "insert into theatre(theatre_name,theatre_city,city_pincode,delete_flag) values(?,?,?,?)";
 				try {
 					// step1 : obtain psz
 					ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -160,8 +131,7 @@ public class TheatreDaoImpl implements TheatreDao{
 					ps.setString(1, theatre.getTheatreName());
 					ps.setString(2, theatre.getCityName());
 					ps.setLong(3, theatre.getCityPincode());
-					ps.setInt(4, theatre.getScreens());
-					ps.setInt(5, 0);
+					ps.setInt(4, 0);
 					// step 3: execute Query (for DML we have executeUpdate method )
 					noOfRec = ps.executeUpdate();
 				} catch (SQLException e) {
@@ -184,11 +154,6 @@ public class TheatreDaoImpl implements TheatreDao{
 				}
 
 			}
-//		    @Override
-//		    public Theatre addTheatre(Theatre theatre) {
-//		        theatres.put(theatre.getTheatreId(),theatre);
-//		        return theatre;
-//		    }
 
 		    @Override
 		    public List<Theatre> getTheatres(Integer cityPincode) {
@@ -230,20 +195,12 @@ public class TheatreDaoImpl implements TheatreDao{
 		        return null;
 		    }
 
-	    @Override
-		    public List<Movie> getMoviesinTheatre(Integer theatreId) {
-		        return null; 
-		    //theatres.get(theatreId).getMovies();
-		    }
+//	    @Override
+//		    public List<Movie> getMoviesinTheatre(Integer theatreId) {
+//		        return null; 
+//		    //theatres.get(theatreId).getMovies();
+//		    }
 
-		    public Screen searchScreen(Integer theatreId,Integer screenId){
-//		        for(int i=0;i<theatres.get(theatreId).getScreens().size();i++){
-//		            if(theatres.get(theatreId).getScreens().get(i).getScreenId().equals(screenId)){
-//		                return theatres.get(theatreId).getScreens().get(i);
-//		            }
-//		        }
-		        return null;
-		    }
 		    @Override
 		    public Show addShow(Integer theatreId, Integer screenId, Show show) {
 //		        Screen sc = searchScreen(theatreId,screenId);
@@ -286,10 +243,7 @@ public class TheatreDaoImpl implements TheatreDao{
 //
 		    }
 //
-		    public List<Screen> getScreensInTheatre(Integer theatreId){
-		        return null;
-		        		//searchTheatre(theatreId).getScreens();
-		    }
+		 
 
 
 		    @Override
@@ -299,23 +253,23 @@ public class TheatreDaoImpl implements TheatreDao{
 		        return null;
 		    }
 
-		    @Override
-		    public List<String> getSeatsAvailability(Integer theatreId, Integer showId, Date date) {
-		        Show show = searchShow(theatreId, showId);
-		        if(show != null) {
-		            show.getBookedSeats().get(date);
-		        }
-		        return null;
-		    }
-//
-		    @Override
-		    public List<String> updateSeats(Integer theatreId, Integer showId, Date date,List<String> seats) {
+//		    @Override
+//		    public List<String> getSeatsAvailability(Integer theatreId, Integer showId, Date date) {
 //		        Show show = searchShow(theatreId, showId);
+//		        if(show != null) {
+//		            show.getBookedSeats().get(date);
+//		        }
+//		        return null;
+//		    }
+//
+//		    @Override
+//		    public List<String> updateSeats(Integer theatreId, Integer showId, Date date,List<String> seats) {
+//		    	Show show = searchShow(theatreId, showId);
 //		        //System.out.println(show);
 //		        show.getBookedSeats().get(date).addAll(seats);
-		        return null;
-		        		//seats;
-		    }
+//		        return null;
+//		        		//seats;
+//		    }
 //
 		    public List<String> cancelSeats(Integer theatreId, Integer showId,Date date,List<String> seats){
 //		        Show show = searchShow(theatreId, showId);
@@ -326,18 +280,18 @@ public class TheatreDaoImpl implements TheatreDao{
 		    	//seats;
 		    }
 
-		    @Override
-		    public List<Show> getShowsInTheatre(Integer theatreId) {
-//		        List<Show> shows = new ArrayList<>();
-//		        List<Screen> screens = getScreensInTheatre(theatreId);
-//		        for(int i=0;i<screens.size();i++){
-//		            shows.addAll(screens.get(i).getShows());
-//		        }
-		        return null;
-		    }
+//		    @Override
+//		    public List<Show> getShowsInTheatre(Integer theatreId) {
+////		        List<Show> shows = new ArrayList<>();
+////		        List<Screen> screens = getScreensInTheatre(theatreId);
+////		        for(int i=0;i<screens.size();i++){
+////		            shows.addAll(screens.get(i).getShows());
+////		        }
+//		        return null;
+//		    }
 
-		    @Override
-		    public List<Show> getShowsInScreen(Integer theatreId, Integer screenId) {
+//		    @Override
+//		    public List<Show> getShowsInScreen(Integer theatreId, Integer screenId) {
 //		        List<Show> shows = new ArrayList<>();
 //		        for(int i=0;i<searchTheatre(theatreId).getScreens().size();i++){
 //		            if(searchTheatre(theatreId).getScreens().get(i).getScreenId().equals(screenId)){
@@ -345,9 +299,9 @@ public class TheatreDaoImpl implements TheatreDao{
 //		                return shows;
 //		            }
 //		        }
-		        return null;
+//		        return null;
 //		    }
-		}
+//		}
 
 			@Override
 			public Boolean addMovie(Movie movie) throws Exception {
@@ -355,6 +309,7 @@ public class TheatreDaoImpl implements TheatreDao{
 				int noOfRec1 = 0;
 				System.out.println(movie);
 				String sql = "insert into movie(movie_name,movie_genre,movie_director,movie_length,movie_language,theatre_id) values(?,?,?,?,?,?)";
+//				String sql1 = "Alter table movie set delete_flag=1 where";
 				try {
 					// step1 : obtain psz
 					ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -424,33 +379,11 @@ public class TheatreDaoImpl implements TheatreDao{
 			}
 
 			@Override
-			public Map<Integer,Screen> getScreens(int theatreid) throws Exception {
-						String sql = "Select screen_id from screen where theater_id=?";
-						Map<Integer,Screen> screenmap = new HashMap<Integer,Screen>();
-						try {
-							ps = connection.prepareStatement(sql);
-							rs = ps.executeQuery();
-							Screen screen = new Screen();
-							while (rs.next()) {
-								screen.setScreenId(rs.getInt("screen_id"));
-								
-								screenmap.put(rs.getInt("screen_id"), screen);
-								System.out.println(screen);
-							}
-						} catch (SQLException e) {
-							System.out.println("Exception occured at listTheatrenames dao method: "+e);
-						} finally {
-							if (ps != null) {
-								try {
-									ps.close();
-								} catch (SQLException e1) {
-									System.out.println(" 2nd Error at list theatres names dao method");
-								}
-							}
-							
-						}
-						return screenmap;
-					}
+			public Boolean addShow(Show show) throws Exception {
+				System.out.println("Dao layer add show");
+				return null;
+			}
+
 			}
 
 

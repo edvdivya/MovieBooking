@@ -8,15 +8,15 @@ public class Theatre {
 	    private String theatreName;
 	    private Integer cityPincode;
 	    private String cityName;
-	    private Integer screens;	   
+	    	   
 
 
-	    public Theatre(Integer theatreId,String theatreName, String cityName, Integer cityPincode, Integer screens) {
+	    public Theatre(Integer theatreId,String theatreName, String cityName, Integer cityPincode) {
 	        this.theatreId = theatreId;
 	        this.theatreName = theatreName;
 	        this.cityPincode = cityPincode;
 	        this.cityName = cityName;
-	        this.screens = screens;
+	   
 	        
 	    }
 
@@ -24,13 +24,12 @@ public class Theatre {
 			// TODO Auto-generated constructor stub
 		}
 
-		public Theatre(String theatreName2, String theatreCity, Integer city_pincode, Integer screens2) {
+		public Theatre(String theatreName2, String theatreCity, Integer city_pincode) {
 			// TODO Auto-generated constructor stub
 			   
 		        this.theatreName = theatreName2;
 		        this.cityPincode = city_pincode;
 		        this.cityName = theatreCity;
-		        this.screens = screens2;
 		}
 
 		public Integer getTheatreId() {
@@ -47,10 +46,6 @@ public class Theatre {
 
 	    public String getCityName() {
 	        return cityName;
-	    }
-
-	    public Integer getScreens() {
-	        return screens;
 	    }
 	    
 	    public void setTheatreId(Integer theatreId) {
@@ -69,17 +64,12 @@ public class Theatre {
 	        this.cityPincode = cityPincode;
 	    }
 	   
-	    public void setScreens(Integer screens) {
-	        this.screens = screens;
-	    }
-
 	    @Override
 	    public int hashCode() {
 	        final int prime = 31;
 	        int result = 1;
 	        result = prime * result + ((cityName == null) ? 0 : cityName.hashCode());
 	        result = prime * result + ((cityPincode == null) ? 0 : cityPincode.hashCode());
-	        result = prime * result + ((screens == null) ? 0 : screens.hashCode());
 	        result = prime * result + ((theatreName == null) ? 0 : theatreName.hashCode());
 	        return result;
 	    }
@@ -103,11 +93,6 @@ public class Theatre {
 	                return false;
 	        } else if (!cityPincode.equals(other.cityPincode))
 	            return false;
-	        if (screens == null) {
-	            if (other.screens != null)
-	                return false;
-	        } else if (!screens.equals(other.screens))
-	            return false;
 	        if (theatreName == null) {
 	            if (other.theatreName != null)
 	                return false;
@@ -123,7 +108,6 @@ public class Theatre {
 	                ", theatreName='" + theatreName + '\'' +
 	                ", cityPincode=" + cityPincode +
 	                ", cityName='" + cityName + '\'' +
-	                ", screens=" + screens +
 	                '}';
 	    }
 	}
