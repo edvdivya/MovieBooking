@@ -17,10 +17,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	public Employee save(Employee emp) {
 		// TODO Auto-generated method stub
+		
 		EntityManager en = entityFactory.createEntityManager();
 		EntityTransaction transaction = en.getTransaction();
 		transaction.begin();
 		en.persist(emp);
+		en.persist(emp.getEmpProject());
+		en.persist(emp.getDepartment());
 		en.flush();
 		
 		transaction.commit();
@@ -30,6 +33,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public List<Employee> findAll() {
 		EntityManager en = entityFactory.createEntityManager();
 		Query query = en.createQuery("FROM Employee");
+		@SuppressWarnings("unchecked")
 		List<Employee> employeeList = query.getResultList();
 		return employeeList;
 	}
@@ -50,6 +54,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		Query query = en.createQuery("FROM Employee WHERE empSalary BETWEEN :first AND :second");
 		query.setParameter("first", min);
 		query.setParameter("second", max);
+		@SuppressWarnings("unchecked")
 		List<Employee> employeeList = query.getResultList();
 		return employeeList;
 	}
