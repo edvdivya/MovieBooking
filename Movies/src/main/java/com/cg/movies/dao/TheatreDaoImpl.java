@@ -3,9 +3,7 @@ import com.cg.movies.exception.MyException;
 import com.cg.movies.util.DBUtil;
 import com.cg.movies.dto.*;
 import com.cg.movies.exception.*;
-import com.cg.movies.dto.Movie;
-import com.cg.movies.dto.Show;
-import com.cg.movies.dto.Theatre;
+
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -381,6 +379,18 @@ public class TheatreDaoImpl implements TheatreDao{
 			@Override
 			public Boolean addShow(Show show) throws Exception {
 				System.out.println("Dao layer add show");
+				return null;
+			}
+
+			@Override
+			public Boolean deleteMovie(Integer theatreid) throws Exception {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public Customer addCustomer() {
+				// TODO Auto-generated method stub
 				return null;
 			}
 

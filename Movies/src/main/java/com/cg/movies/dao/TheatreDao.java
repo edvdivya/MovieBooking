@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.cg.movies.dto.Customer;
 import com.cg.movies.dto.Movie;
 
 import com.cg.movies.dto.Show;
@@ -31,6 +32,7 @@ public interface TheatreDao {
 		public Boolean addScreen(int i, int j,int theatreid) throws MyException;
 		public Boolean addShow(Show show) throws Exception;
 		public Boolean deleteMovie(Integer theatreid) throws Exception;
+		public Customer addCustomer();
 		
 	}
 

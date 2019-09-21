@@ -13,10 +13,8 @@ public class MyApplication {
 		TheatreService service = new TheatreServiceImpl();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat sdf1 = new SimpleDateFormat("hh:mm:ss");
-		java.util.Date releaseDate = sdf.parse("2019-06-28");
-		ArrayList<Show> listofShowsMovie1 = new ArrayList<Show>();
-		ArrayList<Show> listofShowsMovie2 = new ArrayList<Show>();
-		ArrayList<Movie> listofMovies = new ArrayList<Movie>();
+		
+		
 		Scanner scanner = new Scanner(System.in);
 		int count = 2;
 		while ((count--) > 0) {
@@ -143,15 +141,25 @@ public class MyApplication {
 					System.out.println("Enter the UserId: ");
 					System.out.println("Enter the Password: ");
 				case 2:
-					System.out.println("Enter the movie");
-					//list theatres with that movie
-					System.out.println("select theatre");
-					//list show with given movie and theatre
-					System.out.println("enter show id");
-					System.out.println("Enter seats");
+					//enter your usernam
+//					enter password
+					//match username and password
+					//print logged ina
+					
+					//get movies
+					//enter movie id
+					//gets theatre in which movie is there
+					//enter theatre id
+					//get show id for movie and theatre
+					//enter show id
+					//enter seats...and all
+//					print cost
+					//add booking
+//					print ticket
 					//make booking for seats at some cost from show
 					break;
 				case 3:
+					//
 					// prints list of movies
 					System.out.println("Select movie you want to see shows for");
 					String bookMovie = scanner.next();
@@ -176,17 +184,26 @@ public class MyApplication {
 				switch (viewerChoice) {
 
 				case 1:
-					System.out.println("Enter Your name");
-					System.out.println("Enter your contact");
-					System.out.println("Enter the password");
-					System.out.println("Confirm password");
+					Customer customer = new Customer();
+					System.out.println("Enter Username");
+					String userName = scanner.next();
+					System.out.println("Enter the Password");
+					String userPass = scanner.next();
+					System.out.println("Confirm Password");
+					String confirmPass = scanner.next();
+					System.out.println("Enter your Phone number");
+					String contactNumber = scanner.next();
+					customer.setUserName(userName);
+					customer.setUserpass(userPass);
+					customer.setContactNumber(contactNumber);
+					service.addCustomer(customer);
 					break;
 				case 2:
 					// prints list of movies
 					System.out.println("Select movie you want to see shows for");
-					for (int i = 0; i < listofMovies.size(); i++) {
-						System.out.println(listofMovies.get(i));
-					}
+//					for (int i = 0; i < listofMovies.size(); i++) {
+//						System.out.println(listofMovies.get(i));
+//					}
 					String choseMovie = scanner.next();
 
 					// print list of theaters that showcase that movie

@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.cg.movies.dto.Customer;
 import com.cg.movies.dto.Movie;
 
 import com.cg.movies.dto.Show;
 import com.cg.movies.dto.Theatre;
+import com.cg.movies.exception.UserException;
 public interface TheatreService {
 
 
@@ -24,6 +26,7 @@ public interface TheatreService {
 		public Map<Integer, Theatre> getTheatres(int option) throws Exception;
 		public Boolean addMovie(Movie movie) throws Exception;
 		public void deleteMovie(int nextInt);
+		public Customer addCustomer(Customer customer) throws UserException;
 	
 		
 

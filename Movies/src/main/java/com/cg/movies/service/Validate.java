@@ -1,5 +1,6 @@
 package com.cg.movies.service;
 import com.cg.movies.dao.*;
+import com.cg.movies.dto.Customer;
 import com.cg.movies.dto.Movie;
 import com.cg.movies.dto.Show;
 import com.cg.movies.dto.Theatre;
@@ -45,11 +46,22 @@ public class Validate {
 	        if(!str.matches("[a-zA-Z]+")){
 	            throw new UserException("name can not contain special charecters");
 	        }
-	        return false;
+	        return true;
 	    }
 		public static boolean validate_show(Show show) {
 			System.out.println("Show date");
-			return false;
+			//validation
+			return true;
+		}
+		public static boolean validate_customer(Customer customer) throws UserException {
+			// TODO Auto-generated method stub
+			if(customer.getUserpass().length()<8) {
+				throw new UserException("Password should be minimum characters");
+			}
+			if(!customer.getContactNumber().matches("\\d+")) {
+				throw new UserException("Contact number should be in digits");
+			}
+			return true;
 		}
 	}
 
