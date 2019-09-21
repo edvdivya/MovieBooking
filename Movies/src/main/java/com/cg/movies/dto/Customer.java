@@ -1,41 +1,47 @@
 package com.cg.movies.dto;
 
+import java.math.BigInteger;
+import java.util.List;
+
 public class Customer {
 
-	private Integer userId;
-	private String userName;
-	private String userpass;
+	private BigInteger customerId;
+	private String customerName;
+	private String customerPassword;
 	private String contactNumber;
+	
+	private List<Booking> bookings;
 	
 	@Override
 	public String toString() {
-		return "Customer [userId=" + userId + ", userName=" + userName + ", userpass=" + userpass + ", contactNumber="
-				+ contactNumber + "]";
+		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", customerPassword="
+				+ customerPassword + ", contactNumber=" + contactNumber + "]";
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public BigInteger getCustomerId() {
+		return customerId;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setCustomerId(BigInteger customerId) {
+		this.customerId = customerId;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getCustomerName() {
+		return customerName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
-	public String getUserpass() {
-		return userpass;
+	public String getCustomerPassword() {
+		return customerPassword;
 	}
 
-	public void setUserpass(String userpass) {
-		this.userpass = userpass;
+	public void setCustomerPassword(String customerPassword) {
+		this.customerPassword = customerPassword;
 	}
+
 
 	public String getContactNumber() {
 		return contactNumber;

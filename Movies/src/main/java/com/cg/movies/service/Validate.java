@@ -55,7 +55,7 @@ public class Validate {
 		}
 		public static boolean validate_customer(Customer customer) throws UserException {
 			// TODO Auto-generated method stub
-			if(customer.getUserpass().length()<8) {
+			if(customer.getCustomerPassword().length()<8) {
 				throw new UserException("Password should be minimum characters");
 			}
 			if(!customer.getContactNumber().matches("\\d+")) {
