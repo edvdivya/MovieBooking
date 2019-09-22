@@ -44,21 +44,6 @@ public class TheatreServiceImpl implements TheatreService {
 
 
 			@Override
-			public Customer addCustomer(Customer customer) throws UserException {
-				// TODO Auto-generated method stub
-				if(Validate.validate_customer(customer)) {
-					return dao.addCustomer();
-				}
-				return null;
-			}
-
-			@Override
-			public Boolean validateCustomer(String userName, String userPass) {
-				// TODO Auto-generated method stub
-				return dao.validateCustomer(userName,userPass);
-			}
-
-			@Override
 			public void deleteMovie(Integer movieId, Integer theatreId) {
 				// TODO Auto-generated method stub
 				

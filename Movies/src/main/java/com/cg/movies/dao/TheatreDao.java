@@ -11,6 +11,7 @@ import com.cg.movies.dto.Movie;
 import com.cg.movies.dto.Show;
 import com.cg.movies.dto.Theatre;
 import com.cg.movies.exception.MyException;
+import com.cg.movies.exception.UserException;
 public interface TheatreDao {
 
 
@@ -20,8 +21,8 @@ public interface TheatreDao {
 	    public Boolean addMovie(Movie movie) throws Exception;
 		public Boolean addShow(Show show) throws Exception;
 		public Boolean deleteMovie(Integer theatreid) throws Exception;
-		public Customer addCustomer();
-		public Boolean validateCustomer(String userName, String userPass);
+		
+		
 		
 	}
 

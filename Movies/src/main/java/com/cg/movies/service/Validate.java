@@ -56,10 +56,13 @@ public class Validate {
 		public static boolean validate_customer(Customer customer) throws UserException {
 			// TODO Auto-generated method stub
 			if(customer.getCustomerPassword().length()<8) {
-				throw new UserException("Password should be minimum characters");
+				throw new UserException("Password should be minimum 8 characters");
 			}
 			if(!customer.getContactNumber().matches("\\d+")) {
 				throw new UserException("Contact number should be in digits");
+			}
+			if(!(customer.getContactNumber().length()==10)) {
+				throw new UserException("Contact number should be 10 digits");
 			}
 			return true;
 		}

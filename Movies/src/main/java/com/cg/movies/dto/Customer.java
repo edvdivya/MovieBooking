@@ -1,16 +1,26 @@
 package com.cg.movies.dto;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import java.math.BigInteger;
 import java.util.List;
-
+@Entity
+@Table(name = "customer")
 public class Customer {
-
+	@Id
+	@Column(name="user_id")
 	private BigInteger customerId;
+	@Column(name="username")
 	private String customerName;
+	@Column(name="password")
 	private String customerPassword;
+	@Column(name="phone_number")
 	private String contactNumber;
 	
-	private List<Booking> bookings;
 	
 	@Override
 	public String toString() {

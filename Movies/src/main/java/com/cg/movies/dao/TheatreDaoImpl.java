@@ -1,5 +1,4 @@
 package com.cg.movies.dao;
-import com.cg.movies.exception.MyException;
 import com.cg.movies.util.DBUtil;
 import com.cg.movies.dto.*;
 import com.cg.movies.exception.*;
@@ -134,18 +133,7 @@ public class TheatreDaoImpl implements TheatreDao{
 				return null;
 			}
 
-			@Override
-			public Customer addCustomer() {
-				// TODO Auto-generated method stub
-				
-				return null;
-			}
-
-			@Override
-			public Boolean validateCustomer(String userName, String userPass) {
-				// TODO Auto-generated method stub
-				return null;
-			}
+		
 
 			}
 

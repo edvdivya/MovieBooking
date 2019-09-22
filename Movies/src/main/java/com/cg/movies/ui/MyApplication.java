@@ -11,9 +11,9 @@ public class MyApplication {
 	public static void main(String[] args) throws Exception {
 
 		TheatreService service = new TheatreServiceImpl();
+		CustomerService customerService = new CustomerServiceImpl();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat sdf1 = new SimpleDateFormat("hh:mm:ss");
-		
 		
 		Scanner scanner = new Scanner(System.in);
 		int count = 2;
@@ -87,10 +87,7 @@ public class MyApplication {
 						System.out.println("Movie Added");
 					} catch (Exception exception) {
 						System.out.println(exception.getMessage());
-					}
-					
-//					service.getTheatres();
-					
+					}			
 					break;
 				case 3:
 					System.out.println("Enter the TheatreId: ");
@@ -113,7 +110,6 @@ public class MyApplication {
 					} catch (Exception exception) {
 						System.out.println(exception.getMessage());
 					}			
-					
 					break;
 				case 4:
 					System.out.println("Enter the theatre id");
@@ -128,7 +124,6 @@ public class MyApplication {
 					break;					
 				}
 				break;
-
 			case 2:
 				System.out.println("1. Login");
 				System.out.println("2. View Movies");
@@ -142,55 +137,54 @@ public class MyApplication {
 					String userName=scanner.next();
 					System.out.println("Enter the Password: ");
 					String userPass=scanner.next();
-					service.validateCustomer(userName,userPass);
-					System.out.println("1. Book Tickets");
-					System.out.println("2. View Bookings");
-					System.out.println("3. Cancel Bookings");
-					int userFunction = scanner.nextInt();
-					switch (userFunction) {
+					Boolean validate_customer=customerService.validateCustomer(userName,userPass);
+					if(validate_customer==true) {
+						System.out.println("You've been successfully logged in");
+						System.out.println("1. Book Tickets");
+						System.out.println("2. View Bookings");
+						System.out.println("3. Cancel Bookings");
+						System.out.println("Enter your choice");
+						int userFunction = scanner.nextInt();
+						switch (userFunction) {
+							
+						case 1:
+							//get movies list from database
+							System.out.println("Enter the Movie Id you want to book");
+							//get theaters from database with that movie
+							//enter the theater to watch movie
+							//get the shows in that theater with that movie
+							//enter show id to book tickets for
+							//enter the number of seats
+							//get amount to be paid
+							//add booking
+							
+						break;
+						case 2:
+							//pass username to get userid
+							//get bookings with this userid
+							
+							break;
+						case 3:
+							//pass username to get userid
+							//get bookings with this userid
+							//remove booking by setting flag 1 to that booking
+							break;
 						
-					case 1:
-						//get movies list from database
-						System.out.println("Enter the Movie Id you want to see the show for");
-						//get list of theaters from movie Id
-						
-					
-					
+						}
 					}
-					
+					else
+						{
+						System.out.println("Entered Username and password combination does not exist");
+						System.out.println("Please register or check the credentials");
+						exit(1);
+						}
 					
 				case 2:
-					
-					//enter your usernam
-//					enter password
-					//match username and password
-					//print logged ina
-					
-					//get movies
-					//enter movie id
-					//gets theatre in which movie is there
-					//enter theatre id
-					//get show id for movie and theatre
-					//enter show id
-					//enter seats...and all
-//					print cost
-					//add booking
-//					print ticket
-					//make booking for seats at some cost from show
+					//get movies in theaters
+					//get show for them
 					break;
 				case 3:
-					//
-					// prints list of movies
-					System.out.println("Select movie you want to see shows for");
-					String bookMovie = scanner.next();
-					// method call by movie name
-					// print list of theaters that showcase that movie
-					System.out.println("Select Theater");
-					String bookTheater = scanner.next();
-					// print show for that movie id in this theater id by fetching theater id from
-					// theater name
-					System.out.println("Select Show");
-					// method call to book show
+					exit(1);
 					break;
 
 				}
@@ -205,32 +199,39 @@ public class MyApplication {
 
 				case 1:
 					Customer customer = new Customer();
+					System.out.println("Enter userid");
+					BigInteger userid = scanner.nextBigInteger();
 					System.out.println("Enter Username");
 					String customerName = scanner.next();
 					System.out.println("Enter the Password");
 					String customerPass = scanner.next();
 					System.out.println("Confirm Password");
 					String confirmPass = scanner.next();
-					System.out.println("Enter your Phone number");
-					String contactNumber = scanner.next();
-					customer.setCustomerName(customerName);
-					customer.setCustomerPassword(customerPass);
-					customer.setContactNumber(contactNumber);
-					service.addCustomer(customer);
+					if(customerPass.equals(confirmPass)) {
+						System.out.println("Password Matched");
+						System.out.println("Enter your Phone number");
+						String contactNumber = scanner.next();
+						customer.setCustomerId(userid);
+						customer.setCustomerName(customerName);
+						customer.setCustomerPassword(customerPass);
+						customer.setContactNumber(contactNumber);
+						try {
+						System.out.println(customerService.addCustomer(customer));
+						}
+						catch(Exception e) {
+							System.out.println(e.getMessage());
+						}
+					}
+					else 
+						{
+						  System.out.println("Password doesn't Match");
+						  exit(1);
+						}
+					
 					break;
 				case 2:
-					// prints list of movies
-					System.out.println("Select movie you want to see shows for");
-//					for (int i = 0; i < listofMovies.size(); i++) {
-//						System.out.println(listofMovies.get(i));
-//					}
-					String choseMovie = scanner.next();
-
-					// print list of theaters that showcase that movie
-					System.out.println("Select Theater");
-					String choseTheater = scanner.next();
-					// print show for that movie id in this theater id by fetching theater id from
-					// theater name
+					//get movies in theaters
+					//get show for them
 					break;
 				case 3:
 					exit(1);

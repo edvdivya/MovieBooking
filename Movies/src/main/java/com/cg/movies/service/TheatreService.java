@@ -16,9 +16,7 @@ public interface TheatreService {
 	    public Boolean addShow(Show show) throws Exception;
 		public Boolean addMovie(Movie movie) throws Exception;
 		public void deleteMovie(Integer movieId, Integer theatreId );
-		public Customer addCustomer(Customer customer) throws UserException;
-		public Boolean validateCustomer(String userName, String userPass);
-	
+		
 		
 
 	}
