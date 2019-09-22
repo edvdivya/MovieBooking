@@ -79,7 +79,8 @@ public class MyApplication {
 					Date release_date = sdf.parse(scanner.nextLine());
 					System.out.println("Enter the movie language");
 					String language = scanner.nextLine();
-					Movie movie = new Movie(name, genre, director, movieLength, release_date, language,theaterid);
+				
+					Movie movie = new Movie();
 					System.out.println("");
 					try {
 						service.addMovie(movie); //set other flags 1

@@ -91,13 +91,13 @@ public class TheatreDaoImpl implements TheatreDao{
 					// step1 : obtain psz
 					ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 					// step 2: set the ps placeholder values
-					ps.setString(1, movie.getMovieName());
-					ps.setString(2, movie.getGenre());
-					ps.setString(3, movie.getDirector());
-					ps.setInt(4, movie.getMovieLength());
-					ps.setString(5, movie.getLanguage());
-					//ps.setLong(6, (movie.getMovieReleaseDate()));
-					ps.setInt(6, movie.getTheatreid());
+//					ps.setString(1, movie.getMovieName());
+//					ps.setString(2, movie.getGenre());
+//					ps.setString(3, movie.getDirector());
+//					ps.setInt(4, movie.getMovieLength());
+//					ps.setString(5, movie.getLanguage());
+//					//ps.setLong(6, (movie.getMovieReleaseDate()));
+//					ps.setInt(6, movie.getTheatre());
 					// step 3: execute Query (for DML we have executeUpdate method )
 					noOfRec1 = ps.executeUpdate();
 				} catch (SQLException e) {
