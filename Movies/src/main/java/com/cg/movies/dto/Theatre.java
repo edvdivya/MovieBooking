@@ -12,182 +12,144 @@ import javax.persistence.Table;
 public class Theatre {
 		@Id
 		@Column(name="theatreId")
-	    private final Integer theatreId;
+	    private  Integer theatreId;
 		@Column(name="theatreName")
-	    private final String theatreName;
+	    private  String theatreName;
 		@Column(name="cityPincodee")
-	    private final Integer cityPincode;
+	    private  Integer cityPincode;
 		@Column(name="cityName")
-	    private final String cityName;
-		
-	    private final String theatreLocation;
-	    private final String managerName;
-	    private final String managerContact;
-	    private List<Screen> screens;
+	    private  String cityName;
+		@Column(name="deleteFlag")
+		private int deleteFlag; 
+	   
 	    @ManyToMany(mappedBy = "theatreList")
 	    private List<Movie> movies;
-	    private static Integer count=0;
-
-	    public Theatre(String theatreName, Integer cityPincode,
-	                   String cityName, String theatreLocation, String managerName,
-	                   String managerContact) {
-	        this.theatreId = ++count;
-	        this.theatreName = theatreName;
-	        this.cityPincode = cityPincode;
-	        this.cityName = cityName;
-	        this.theatreLocation = theatreLocation;
-	        this.managerName = managerName;
-	        this.managerContact = managerContact;
+	    
+	    public Theatre() {
+	    	
 	    }
 
-	    public Theatre(String theatreName, Integer cityPincode, String cityName,
-	                   String theatreLocation, String managerName, String managerContact,
-	                   List<Screen> screens, List<Movie> movies) {
-	        this.theatreId = ++count;
-	        this.theatreName = theatreName;
-	        this.cityPincode = cityPincode;
-	        this.cityName = cityName;
-	        this.theatreLocation = theatreLocation;
-	        this.managerName = managerName;
-	        this.managerContact = managerContact;
-	        this.screens = screens;
-	        this.movies = movies;
-	    }
+		public Theatre(Integer theatreId, String theatreName, Integer cityPincode, String cityName, int deleteFlag,
+				List<Movie> movies) {
+			super();
+			this.theatreId = theatreId;
+			this.theatreName = theatreName;
+			this.cityPincode = cityPincode;
+			this.cityName = cityName;
+			this.deleteFlag = deleteFlag;
+			this.movies = movies;
+		}
 
-	    public Integer getTheatreId() {
-	        return theatreId;
-	    }
+		public Integer getTheatreId() {
+			return theatreId;
+		}
 
-	    public String getTheatreName() {
-	        return theatreName;
-	    }
+		public void setTheatreId(Integer theatreId) {
+			this.theatreId = theatreId;
+		}
 
-	    public Integer getCityPincode() {
-	        return cityPincode;
-	    }
+		public String getTheatreName() {
+			return theatreName;
+		}
 
-	    public String getCityName() {
-	        return cityName;
-	    }
+		public void setTheatreName(String theatreName) {
+			this.theatreName = theatreName;
+		}
 
-	    public String getTheatreLocation() {
-	        return theatreLocation;
-	    }
+		public Integer getCityPincode() {
+			return cityPincode;
+		}
 
-	    public String getManagerName() {
-	        return managerName;
-	    }
+		public void setCityPincode(Integer cityPincode) {
+			this.cityPincode = cityPincode;
+		}
 
-	    public String getManagerContact() {
-	        return managerContact;
-	    }
+		public String getCityName() {
+			return cityName;
+		}
 
-	    public List<Screen> getScreens() {
-	        return screens;
-	    }
+		public void setCityName(String cityName) {
+			this.cityName = cityName;
+		}
 
-	    public void setScreens(List<Screen> screens) {
-	        this.screens = screens;
-	    }
+		public int getDeleteFlag() {
+			return deleteFlag;
+		}
 
-	    public List<Movie> getMovies() {
-	        return movies;
-	    }
+		public void setDeleteFlag(int deleteFlag) {
+			this.deleteFlag = deleteFlag;
+		}
 
-	    public void setMovies(List<Movie> movies) {
-	        this.movies = movies;
-	    }
+		public List<Movie> getMovies() {
+			return movies;
+		}
 
-	    public static Integer getCount() {
-	        return count;
-	    }
+		public void setMovies(List<Movie> movies) {
+			this.movies = movies;
+		}
 
-	    public void setCount() {
-	        count--;
-	    }
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((cityName == null) ? 0 : cityName.hashCode());
+			result = prime * result + ((cityPincode == null) ? 0 : cityPincode.hashCode());
+			result = prime * result + deleteFlag;
+			result = prime * result + ((movies == null) ? 0 : movies.hashCode());
+			result = prime * result + ((theatreId == null) ? 0 : theatreId.hashCode());
+			result = prime * result + ((theatreName == null) ? 0 : theatreName.hashCode());
+			return result;
+		}
 
-	    @Override
-	    public int hashCode() {
-	        final int prime = 31;
-	        int result = 1;
-	        result = prime * result + ((cityName == null) ? 0 : cityName.hashCode());
-	        result = prime * result + ((cityPincode == null) ? 0 : cityPincode.hashCode());
-	        result = prime * result + ((managerContact == null) ? 0 : managerContact.hashCode());
-	        result = prime * result + ((managerName == null) ? 0 : managerName.hashCode());
-	        result = prime * result + ((movies == null) ? 0 : movies.hashCode());
-	        result = prime * result + ((screens == null) ? 0 : screens.hashCode());
-	        result = prime * result + ((theatreLocation == null) ? 0 : theatreLocation.hashCode());
-	        result = prime * result + ((theatreName == null) ? 0 : theatreName.hashCode());
-	        return result;
-	    }
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Theatre other = (Theatre) obj;
+			if (cityName == null) {
+				if (other.cityName != null)
+					return false;
+			} else if (!cityName.equals(other.cityName))
+				return false;
+			if (cityPincode == null) {
+				if (other.cityPincode != null)
+					return false;
+			} else if (!cityPincode.equals(other.cityPincode))
+				return false;
+			if (deleteFlag != other.deleteFlag)
+				return false;
+			if (movies == null) {
+				if (other.movies != null)
+					return false;
+			} else if (!movies.equals(other.movies))
+				return false;
+			if (theatreId == null) {
+				if (other.theatreId != null)
+					return false;
+			} else if (!theatreId.equals(other.theatreId))
+				return false;
+			if (theatreName == null) {
+				if (other.theatreName != null)
+					return false;
+			} else if (!theatreName.equals(other.theatreName))
+				return false;
+			return true;
+		}
 
-	    @Override
-	    public boolean equals(Object obj) {
-	        if (this == obj)
-	            return true;
-	        if (obj == null)
-	            return false;
-	        if (getClass() != obj.getClass())
-	            return false;
-	        Theatre other = (Theatre) obj;
-	        if (cityName == null) {
-	            if (other.cityName != null)
-	                return false;
-	        } else if (!cityName.equals(other.cityName))
-	            return false;
-	        if (cityPincode == null) {
-	            if (other.cityPincode != null)
-	                return false;
-	        } else if (!cityPincode.equals(other.cityPincode))
-	            return false;
-	        if (managerContact == null) {
-	            if (other.managerContact != null)
-	                return false;
-	        } else if (!managerContact.equals(other.managerContact))
-	            return false;
-	        if (managerName == null) {
-	            if (other.managerName != null)
-	                return false;
-	        } else if (!managerName.equals(other.managerName))
-	            return false;
-	        if (movies == null) {
-	            if (other.movies != null)
-	                return false;
-	        } else if (!movies.equals(other.movies))
-	            return false;
-	        if (screens == null) {
-	            if (other.screens != null)
-	                return false;
-	        } else if (!screens.equals(other.screens))
-	            return false;
-	        if (theatreLocation == null) {
-	            if (other.theatreLocation != null)
-	                return false;
-	        } else if (!theatreLocation.equals(other.theatreLocation))
-	            return false;
-	        if (theatreName == null) {
-	            if (other.theatreName != null)
-	                return false;
-	        } else if (!theatreName.equals(other.theatreName))
-	            return false;
-	        return true;
-	    }
-
-	    @Override
-	    public String toString() {
-	        return "Theatre{" +
-	                "theatreId=" + theatreId +
-	                ", theatreName='" + theatreName + '\'' +
-	                ", cityPincode=" + cityPincode +
-	                ", cityName='" + cityName + '\'' +
-	                ", theatreLocation='" + theatreLocation + '\'' +
-	                ", managerName='" + managerName + '\'' +
-	                ", managerContact='" + managerContact + '\'' +
-	                ", screens=" + screens +
-	                ", movies=" + movies +
-	                '}';
-	    }
-	}
-
-
-
+		@Override
+		public String toString() {
+			return "Theatre [theatreId=" + theatreId + ", theatreName=" + theatreName + ", cityPincode=" + cityPincode
+					+ ", cityName=" + cityName + ", deleteFlag=" + deleteFlag + ", movies=" + movies + "]";
+		}
+		
+		
+	    
+	    
+	    
+	    
+}
+	    
