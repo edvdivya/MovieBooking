@@ -2,16 +2,29 @@ package com.cg.movies.dto;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+@Entity
+@Table(name="theatre")
 public class Theatre {
-	
+		@Id
+		@Column(name="theatreId")
 	    private final Integer theatreId;
+		@Column(name="theatreName")
 	    private final String theatreName;
+		@Column(name="cityPincodee")
 	    private final Integer cityPincode;
+		@Column(name="cityName")
 	    private final String cityName;
+		
 	    private final String theatreLocation;
 	    private final String managerName;
 	    private final String managerContact;
 	    private List<Screen> screens;
+	    @ManyToMany(mappedBy = "theatreList")
 	    private List<Movie> movies;
 	    private static Integer count=0;
 
