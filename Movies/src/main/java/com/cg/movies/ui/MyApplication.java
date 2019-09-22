@@ -51,7 +51,7 @@ public class MyApplication {
 							throw new Exception("Please enter valid pincode.");
 						}
 					scanner.nextLine();
-					Theatre theatre = new Theatre(theatreName,theatreCity,city_pincode);
+					Theatre theatre = new Theatre();
 					System.out.println("");
 					try {
 						service.addTheatre(theatre);
@@ -148,26 +148,78 @@ public class MyApplication {
 						switch (userFunction) {
 							
 						case 1:
-							//get movies list from database
-							System.out.println("Enter the Movie Id you want to book");
-							//get theaters from database with that movie
-							//enter the theater to watch movie
-							//get the shows in that theater with that movie
-							//enter show id to book tickets for
-							//enter the number of seats
-							//get amount to be paid
-							//add booking
-							
+							Booking booking=new Booking();
+							System.out.println("Movies: ");
+							List<Movie> movieList=customerService.getMovies();
+							for(Movie movie : movieList) {
+								System.out.println("" + movie.getMovieId() + " : " + movie.getMovieName());
+							}
+							System.out.println("Enter the Movie Id you want to book show for");
+							Integer movieId=scanner.nextInt();
+							System.out.println("Theatres with this movie: ");
+							List<String> theatresList = customerService.getTheatreByMovieId(movieId);
+							if (theatresList != null) {
+								theatresList.forEach(theatre -> {
+									System.out.println(theatre);
+								});
+							}
+							System.out.println("Enter the theatre Id: ");
+							Integer theatreSelected= scanner.nextInt();
+							List<String> showsList = customerService.getShows(movieId,theatreSelected);
+							if (showsList != null) {
+								showsList.forEach(show -> {
+									System.out.println(show);
+								});
+							}
+							System.out.println("Enter the showId : ");
+							Integer showSelected = scanner.nextInt();
+							Show show=new Show();
+							Customer customer = new Customer();
+							show.setShowId(showSelected);
+							System.out.println("Enter the booking Id");
+							BigInteger bookingId = scanner.nextBigInteger();
+							System.out.println("Enter the seats you want");
+							Integer seatsBooked= scanner.nextInt();
+							System.out.println("Total Cost would be "+seatsBooked*200+ " Rs.");
+							Integer total_cost=seatsBooked*200;
+							String payment="Done";
+							booking.setBookingId(bookingId);
+							booking.setPayment(payment);
+							booking.setTotalCost(total_cost);
+							booking.setSeatsBooked(seatsBooked);
+							booking.setShow(show);
+							BigInteger userId=customerService.getUserId(userName);
+							customer.setCustomerId(userId);
+							booking.setCustomer(customer);
+							Boolean bookingStatus=customerService.addBooking(booking);
+							if(bookingStatus==false) {
+								System.out.println("Booking could not be completed");
+							}
+							else
+								System.out.println("Booking successfully done: " +bookingId);
+													
 						break;
 						case 2:
-							//pass username to get userid
-							//get bookings with this userid
+							BigInteger userID=customerService.getUserId(userName);
+							List<String> bookingsDone=customerService.viewBookings(userID);
+							if (bookingsDone != null) {
+								bookingsDone.forEach(bookings -> {
+									System.out.println(bookings);
+								});
+							}
 							
 							break;
 						case 3:
-							//pass username to get userid
-							//get bookings with this userid
-							//remove booking by setting flag 1 to that booking
+							BigInteger user_id=customerService.getUserId(userName);
+							List<String> bookingList=customerService.viewBookings(user_id);
+							if (bookingList != null) {
+								bookingList.forEach(bookings -> {
+									System.out.println(bookings);
+								});
+							}
+							System.out.println("Enter the booking id to cancel");
+							BigInteger booking_id = scanner.nextBigInteger(); 
+							Boolean cancelBooking=customerService.cancelBooking(booking_id);
 							break;
 						
 						}
@@ -180,8 +232,28 @@ public class MyApplication {
 						}
 					
 				case 2:
-					//get movies in theaters
-					//get show for them
+					System.out.println("Movies: ");
+					List<Movie> movieList=customerService.getMovies();
+					for(Movie movie : movieList) {
+						System.out.println("" + movie.getMovieId() + " : " + movie.getMovieName());
+					}
+					System.out.println("Enter the Movie Id you want to book show for");
+					Integer movieId=scanner.nextInt();
+					System.out.println("Theatres with this movie: ");
+					List<String> theatresList = customerService.getTheatreByMovieId(movieId);
+					if (theatresList != null) {
+						theatresList.forEach(theatre -> {
+							System.out.println(theatre);
+						});
+					}
+					System.out.println("Enter the theatre Id: ");
+					Integer theatreSelected= scanner.nextInt();
+					List<String> showsList = customerService.getShows(movieId,theatreSelected);
+					if (showsList != null) {
+						showsList.forEach(show -> {
+							System.out.println(show);
+						});
+					}
 					break;
 				case 3:
 					exit(1);

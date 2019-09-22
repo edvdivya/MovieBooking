@@ -1,19 +1,45 @@
 package com.cg.movies.dto;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "movie")
 	public class Movie {
+		@Id
+		@Column(name="movie_id")
 		private Integer movieId;
+		@Column(name="movie_name")
 		private String movieName;
+		@Column(name="movie_genre")
 		private String genre;
+		@Column(name="movie_director")
 		private String director;
+		@Column(name="movie_length")
 		private Integer movieLength;
+		@Column(name="movie_release_date")
 		private Date movieReleaseDate;
+		@Column(name="movie_language")
 		private String language;
-		private Theatre theatre;
+		@ManyToMany(cascade = CascadeType.PERSIST)
+		@JoinTable(joinColumns = @JoinColumn(name = "movie_fk"), inverseJoinColumns = @JoinColumn(name = "theatre_fk"))
+		private List<Theatre> theatre;
+		@OneToMany
+		@JoinColumn(name = "show_id")
+		private List<Show> showsList;
 		
 		public Movie(Integer movieId, String movieName, String genre, String director, Integer movieLength,
-				Date movieReleaseDate, String language, Theatre theatre) {
+				Date movieReleaseDate, String language, List<Theatre> theatre, List<Show> showsList) {
 			super();
 			this.movieId = movieId;
 			this.movieName = movieName;
@@ -23,6 +49,7 @@ import java.util.Objects;
 			this.movieReleaseDate = movieReleaseDate;
 			this.language = language;
 			this.theatre = theatre;
+			this.showsList = showsList;
 		}
 		public Movie() {
 			// TODO Auto-generated constructor stub
@@ -69,12 +96,19 @@ import java.util.Objects;
 		public void setLanguage(String language) {
 			this.language = language;
 		}
-		public Theatre getTheatre() {
+		public List<Theatre> getTheatre() {
 			return theatre;
 		}
-		public void setTheatre(Theatre theatre) {
+		public void setTheatre(List<Theatre> theatre) {
 			this.theatre = theatre;
 		}
+		public List<Show> getShowsList() {
+			return showsList;
+		}
+		public void setShowsList(List<Show> showsList) {
+			this.showsList = showsList;
+		}
+		
 		
 
 		

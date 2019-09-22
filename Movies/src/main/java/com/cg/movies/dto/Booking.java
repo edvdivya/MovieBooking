@@ -2,15 +2,30 @@ package com.cg.movies.dto;
 
 import java.math.BigInteger;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+@Entity
+@Table(name="booking")
 public class Booking {
-
+	@Id
+	@Column(name="booking_id")
 	private BigInteger bookingId;
-	private Show show;
-	private Customer customer;
+	@Column(name="seats_booked")
 	private Integer seatsBooked;
+	@Column(name="total_cost")
 	private Integer totalCost;
+	@Column(name="payment")
 	private String payment;
-	
+	@ManyToOne
+	@JoinColumn(name = "show_id")
+	private Show show;
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private Customer customer;
 	
 	public Booking() {
 		// TODO Auto-generated constructor stub

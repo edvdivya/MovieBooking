@@ -12,11 +12,9 @@ import com.cg.movies.dto.Show;
 import com.cg.movies.dto.Theatre;
 import com.cg.movies.exception.MyException;
 import com.cg.movies.exception.UserException;
+
 public interface TheatreDao {
 
-
-		
-	    
 	    public Boolean addTheatre(Theatre theatre) throws Exception;
 	    public Boolean addMovie(Movie movie) throws Exception;
 		public Boolean addShow(Show show) throws Exception;

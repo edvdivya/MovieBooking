@@ -1,22 +1,50 @@
 package com.cg.movies.dto;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+@Entity
+@Table(name="movie_show")
 public class Show {
-
+	@Id
+	@Column(name="show_id")
 	private Integer showId;
+	@Column(name="show_date")
     private Date show_date;
-    private Date show_timings;
+	@Column(name="show_timings")
+    private Time show_timings;
+	@Column(name="available_seats")
     private Integer availableSeats;
+	@Column(name="booked_seats")
     private Integer bookedSeats;
+	@ManyToOne
+	@JoinColumn(name = "movie_id")
     private Movie movie;
+	@ManyToOne
+	@JoinColumn(name = "theatre_id")
     private Theatre theatre;
-    
-	public Show(Integer showId, Date show_date, Date show_timings, Integer availableSeats, Integer bookedSeats,
-			Movie movie, Theatre theatre) {
+	@OneToMany
+	@JoinColumn(name = "booking_id")
+	private List<Booking> bookings;
+	
+	
+	public Show() {
+		
+		// TODO Auto-generated constructor stub
+	}
+
+	public Show(Integer showId, Date show_date, Time show_timings, Integer availableSeats, Integer bookedSeats,
+			Movie movie, Theatre theatre, List<Booking> bookings) {
 		super();
 		this.showId = showId;
 		this.show_date = show_date;
@@ -25,6 +53,7 @@ public class Show {
 		this.bookedSeats = bookedSeats;
 		this.movie = movie;
 		this.theatre = theatre;
+		this.bookings = bookings;
 	}
 
 	public Integer getShowId() {
@@ -43,11 +72,11 @@ public class Show {
 		this.show_date = show_date;
 	}
 
-	public Date getShow_timings() {
+	public Time getShow_timings() {
 		return show_timings;
 	}
 
-	public void setShow_timings(Date show_timings) {
+	public void setShow_timings(Time show_timings) {
 		this.show_timings = show_timings;
 	}
 
@@ -81,9 +110,16 @@ public class Show {
 
 	public void setTheatre(Theatre theatre) {
 		this.theatre = theatre;
-	}    
- 
+	}
 
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
+	}
+	
    
 }
 

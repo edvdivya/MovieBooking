@@ -1,5 +1,6 @@
 package com.cg.movies.service;
 import com.cg.movies.dao.*;
+import com.cg.movies.dto.Booking;
 import com.cg.movies.dto.Customer;
 import com.cg.movies.dto.Movie;
 import com.cg.movies.dto.Show;
@@ -63,6 +64,12 @@ public class Validate {
 			}
 			if(!(customer.getContactNumber().length()==10)) {
 				throw new UserException("Contact number should be 10 digits");
+			}
+			return true;
+		}
+		public static boolean validate_booking(Booking booking) {
+			if(booking.getSeatsBooked()>3) {
+				return false;
 			}
 			return true;
 		}

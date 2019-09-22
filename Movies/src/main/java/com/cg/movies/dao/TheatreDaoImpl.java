@@ -1,5 +1,6 @@
 package com.cg.movies.dao;
-import com.cg.movies.util.DBUtil;
+
+
 import com.cg.movies.dto.*;
 import com.cg.movies.exception.*;
 
@@ -11,131 +12,78 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.transaction.Transactional;
+
+
 
 public class TheatreDaoImpl implements TheatreDao{
 
-	private static Connection connection;
-	private PreparedStatement ps;
-	private Statement st;
-	private ResultSet rs;
-	private static Logger myLogger;
-	static {
-		Properties props = System.getProperties();
-		String userDir = props.getProperty("user.dir") + "/src/main/resources/";
-		System.out.println("Current working directory is " + userDir);
-		PropertyConfigurator.configure(userDir + "log4j.properties");
-		myLogger = Logger.getLogger("TheatreDaoImpl.class");
-	}
+	public static int flag=0;
+	EntityManagerFactory entityFactory = Persistence.createEntityManagerFactory("Movies");
+	@Transactional
+	public Theatre saveTheatre(Theatre theatre) {
 
-	static {
-		try {
-			connection = DBUtil.getConnection();
-			myLogger.info("connection Obtained!!");
-		} catch (MyException e) {
-			myLogger.error("Connection Not Obtained at authorDao : " + e);
+		EntityManager em = entityFactory.createEntityManager();
+		Query query = em.createQuery("From Theatre");
+		List<Theatre> theatreList=query.getResultList();
+		if(theatreList.isEmpty()) {
+			
+			EntityTransaction tran=em.getTransaction();
+			tran.begin();
+			em.persist(theatre);
+			tran.commit();
+			System.out.println("Theatre has been added successfully");
+			return theatre;
 		}
+		System.out.println("Theatre already exists in database");
+		return null;
 	}
-		    private static Map<Integer, Theatre> theatres = new HashMap<>();
-		    
-
-	/* author divya */   
-
-		    public Boolean addTheatre(Theatre theatre) throws MyException {
-				// TODO Auto-generated method stub
-				int noOfRec = 0;
-				System.out.println(theatre);
-				String sql = "insert into theatre(theatre_name,theatre_city,city_pincode,delete_flag) values(?,?,?,?)";
-				try {
-					// step1 : obtain psz
-					ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-					// step 2: set the ps placeholder values
-					ps.setString(1, theatre.getTheatreName());
-					ps.setString(2, theatre.getCityName());
-					ps.setLong(3, theatre.getCityPincode());
-					ps.setInt(4, 0);
-					// step 3: execute Query (for DML we have executeUpdate method )
-					noOfRec = ps.executeUpdate();
-				} catch (SQLException e) {
-					myLogger.error(" Error at addTheatre Dao method : " + e);
-					throw new MyException(" Error at addTheatre Dao method : " + e);
-				} finally {
-					if (ps != null) {
-						try {
-							ps.close();
-						} catch (SQLException e) {
-							myLogger.error(" Error at addTheatre Dao method : " + e);
-						}
-					}
-				}
-				if (noOfRec > 0) {
-					return true;
-
-				} else {
-					return false;
-				}
-
-			}
-
-
-			@Override
-			public Boolean addMovie(Movie movie) throws Exception {
-				
-				int noOfRec1 = 0;
-				System.out.println(movie);
-				String sql = "insert into movie(movie_name,movie_genre,movie_director,movie_length,movie_language,theatre_id) values(?,?,?,?,?,?)";
-//				String sql1 = "Alter table movie set delete_flag=1 where";
-				try {
-					// step1 : obtain psz
-					ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-					// step 2: set the ps placeholder values
-//					ps.setString(1, movie.getMovieName());
-//					ps.setString(2, movie.getGenre());
-//					ps.setString(3, movie.getDirector());
-//					ps.setInt(4, movie.getMovieLength());
-//					ps.setString(5, movie.getLanguage());
-//					//ps.setLong(6, (movie.getMovieReleaseDate()));
-//					ps.setInt(6, movie.getTheatre());
-					// step 3: execute Query (for DML we have executeUpdate method )
-					noOfRec1 = ps.executeUpdate();
-				} catch (SQLException e) {
-					myLogger.error(" Error at add Movie Dao method : " + e);
-					throw new MyException(" Error at add Movie Dao method : " + e);
-				} finally {
-					if (ps != null) {
-						try {
-							ps.close();
-						} catch (SQLException e) {
-							myLogger.error(" Error at add Movie Dao method : " + e);
-						}
-					}
-				}
-				if (noOfRec1 > 0) {
-					return true;
-
-				} else {
-					return false;
-				}
-
-				
-			}
-
-			@Override
-			public Boolean addShow(Show show) throws Exception {
-				System.out.println("Dao layer add show");
-				return null;
-			}
-
-			@Override
-			public Boolean deleteMovie(Integer theatreid) throws Exception {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-		
-
-			}
+	public List<Theatre> getTheatres(Integer cityPincode) { 
+		EntityManager em=entityFactory.createEntityManager();
+		Query query = em.createQuery("From Theatre where cityPincode = :pincode");
+		query.setParameter("pincode",cityPincode);
+		List<Theatre> theatreList=query.getResultList();
+		return theatreList;
+	}
+	
+	public Theatre removeTheatre(Integer theatreId) {
+		EntityManager em = entityFactory.createEntityManager();
+		Theatre theatre=em.find(Theatre.class, theatreId);
+		EntityTransaction tran = em.getTransaction();
+		tran.begin();
+		flag=1;
+		tran.commit();
+		System.out.println("Theatre has been removed");
+		return theatre;
+	}
+	@Override
+	public Boolean addTheatre(Theatre theatre) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Boolean addMovie(Movie movie) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Boolean addShow(Show show) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Boolean deleteMovie(Integer theatreid) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+}
 
 
 
