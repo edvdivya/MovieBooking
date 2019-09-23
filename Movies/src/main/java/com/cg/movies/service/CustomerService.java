@@ -21,5 +21,6 @@ public interface CustomerService {
 	public Boolean addBooking(Booking booking);
 	public List<String> viewBookings(BigInteger userID);
 	public Boolean cancelBooking(BigInteger booking_id);
+	public BigInteger getBookingId(BigInteger userId);
 
 }

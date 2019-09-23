@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,7 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="movie_show")
 public class Show {
-	@Id
+	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="show_id")
 	private Integer showId;
 	@Column(name="show_date")
@@ -33,8 +35,7 @@ public class Show {
 	@ManyToOne
 	@JoinColumn(name = "theatre_id")
     private Theatre theatre;
-	@OneToMany
-	@JoinColumn(name = "booking_id")
+	@OneToMany(mappedBy = "show")
 	private List<Booking> bookings;
 	
 	
@@ -119,6 +120,8 @@ public class Show {
 	public void setBookings(List<Booking> bookings) {
 		this.bookings = bookings;
 	}
+
+
 	
    
 }

@@ -6,6 +6,8 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -16,7 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "movie")
 	public class Movie {
-		@Id
+		@Id @GeneratedValue(strategy = GenerationType.AUTO)
 		@Column(name="movie_id")
 		private Integer movieId;
 		@Column(name="movie_name")
@@ -34,8 +36,7 @@ import javax.persistence.Table;
 		@ManyToMany(cascade = CascadeType.PERSIST)
 		@JoinTable(joinColumns = @JoinColumn(name = "movie_fk"), inverseJoinColumns = @JoinColumn(name = "theatre_fk"))
 		private List<Theatre> theatre;
-		@OneToMany
-		@JoinColumn(name = "show_id")
+		@OneToMany(mappedBy = "movie")
 		private List<Show> showsList;
 		
 		public Movie(Integer movieId, String movieName, String genre, String director, Integer movieLength,

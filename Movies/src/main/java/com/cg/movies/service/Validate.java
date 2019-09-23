@@ -7,6 +7,7 @@ import com.cg.movies.dto.Show;
 import com.cg.movies.dto.Theatre;
 import com.cg.movies.exception.*;
 import java.util.Map;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 public class Validate {
@@ -72,6 +73,11 @@ public class Validate {
 				return false;
 			}
 			return true;
+		}
+		public void validateDate(LocalDate date) throws DateException {
+			if(!date.isAfter(LocalDate.now())){
+				throw new DateException("Date should be after today's date");
+			}
 		}
 	}
 

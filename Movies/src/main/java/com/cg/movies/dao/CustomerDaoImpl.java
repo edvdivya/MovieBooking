@@ -153,11 +153,28 @@ public class CustomerDaoImpl implements CustomerDao {
 	public Boolean cancelBooking(BigInteger bookingid) {
 		
 		EntityManager em=entityFactory.createEntityManager();
-		Query query = em.createQuery("Update Booking set delete_flag = 1 where booking_id = :first");
-		query.setParameter("first",bookingid);
-		query.getFirstResult();
+		
+		  Booking booking = em.find(Booking.class,bookingid);
+		  em.getTransaction().begin();
+		  booking.setFlag(1);
+		  em.getTransaction().commit();
 		
 		return true;
+	}
+
+	@Override
+	public BigInteger getBookingId(BigInteger userId) {
+		EntityManager em=entityFactory.createEntityManager();
+		Customer customer = em.find(Customer.class, userId);
+		if(customer != null) {
+			List<Booking> bookingsList = customer.getBookings();
+			List<String> bookingIds = new ArrayList<String>();
+			bookingsList.forEach(booking -> {
+				bookingIds.add(booking.getBookingId() + " " + booking.getShow());
+			});
+			return bookingsList.get(bookingsList.size()-1).getBookingId();
+		}
+		return null;
 	}
 
 }

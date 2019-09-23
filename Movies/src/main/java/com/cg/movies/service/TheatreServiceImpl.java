@@ -1,59 +1,39 @@
 package com.cg.movies.service;
-import com.cg.movies.dao.*;
-import com.cg.movies.dto.Customer;
-import com.cg.movies.dto.Movie;
 
-import com.cg.movies.dto.Show;
+import java.util.List;
+
+import com.cg.movies.dao.TheatreDao;
+import com.cg.movies.dao.TheatreDaoImpl;
 import com.cg.movies.dto.Theatre;
-import com.cg.movies.exception.*;
-import java.text.SimpleDateFormat;
-import java.util.*;
+
 public class TheatreServiceImpl implements TheatreService {
+	
+	TheatreDao dao = new TheatreDaoImpl();
+	
+	@Override
+	public Theatre save(Theatre theatre) {
 		
-	    private TheatreDao dao = new TheatreDaoImpl();
+		return dao.save(theatre);
+	}
 
-	
-
-		    @Override
-		    public Boolean addTheatre(Theatre theatre) throws Exception {
-		        if(Validate.validate_theatre(theatre)) {
-		        	return dao.addTheatre(theatre);
-		        }
-		        return false;
-		            
-		    }
-
-			@Override
+	@Override
+	public List<Theatre> findAll() {
 		
-			  public Boolean addMovie(Movie movie) throws Exception {
-			        if(Validate.validate_movie(movie)) {
-			        	return dao.addMovie(movie);
-			        }
-			        return false;
-			            
-			    }
+		return dao.findAll();
+	}
 
+	@Override
+	public Theatre find(Integer theatreId) {
+		
+		return dao.find(theatreId);
+	}
 
-			@Override
-			public Boolean addShow(Show show) throws Exception {
-				if(Validate.validate_show(show)) {
-					return dao.addShow(show);
-				}
-				return null;
-			}
+	@Override
+	public Theatre remove(Integer theatreId) {
+		
+		return dao.remove(theatreId);
+	}
 
-
-			@Override
-			public void deleteMovie(Integer movieId, Integer theatreId) {
-				// TODO Auto-generated method stub
-				
-			}
-
+	 
 	
-			
-		}
-
-
-
-	
-
+}

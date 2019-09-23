@@ -74,4 +74,10 @@ public class CustomerServiceImpl implements CustomerService {
 		return dao.cancelBooking(bookingid);
 	}
 
+	@Override
+	public BigInteger getBookingId(BigInteger userId) {
+		// TODO Auto-generated method stub
+		return dao.getBookingId(userId);
+	}
+
 }

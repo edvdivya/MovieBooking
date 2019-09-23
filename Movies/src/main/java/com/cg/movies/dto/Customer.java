@@ -3,6 +3,8 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -13,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "customer")
 public class Customer {
-	@Id
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="user_id")
 	private BigInteger customerId;
 	@Column(name="username")
@@ -22,8 +24,7 @@ public class Customer {
 	private String customerPassword;
 	@Column(name="phone_number")
 	private String contactNumber;
-	@OneToMany
-	@JoinColumn(name = "booking_id")
+	@OneToMany(mappedBy = "customer")
 	private List<Booking> bookings;
 	
 	
@@ -69,6 +70,11 @@ public class Customer {
 	}
 	public void setBookings(List<Booking> bookings) {
 		this.bookings = bookings;
+	}
+	@Override
+	public String toString() {
+		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", customerPassword="
+				+ customerPassword + ", contactNumber=" + contactNumber + ", bookings=" + bookings + "]";
 	}
 	
 

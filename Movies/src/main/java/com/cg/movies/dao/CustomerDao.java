@@ -21,4 +21,5 @@ public interface CustomerDao {
 	public Boolean addBooking(Booking booking);
 	public List<String> viewBookings(BigInteger userID);
 	public Boolean cancelBooking(BigInteger bookingid);
+	public BigInteger getBookingId(BigInteger userId);
 }

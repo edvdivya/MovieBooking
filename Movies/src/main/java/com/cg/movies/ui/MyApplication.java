@@ -10,7 +10,10 @@ public class MyApplication {
 
 	public static void main(String[] args) throws Exception {
 
-		TheatreService service = new TheatreServiceImpl();
+		TheatreService theatreService = new TheatreServiceImpl();
+		AdminService adminService = new AdminServiceImpl();
+		ShowService showService = new ShowServiceImpl();
+		MovieService movieService = new MovieServiceImpl();
 		CustomerService customerService = new CustomerServiceImpl();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat sdf1 = new SimpleDateFormat("hh:mm:ss");
@@ -37,6 +40,12 @@ public class MyApplication {
 				int input = scanner.nextInt();
 				switch (input) {
 				case 1:
+					System.out.println("Enter the UserName");
+					String userName=scanner.next();
+					System.out.println("Enter the Password: ");
+					String userPass=scanner.next();
+					Admin validateAdminLogin =adminService.validateAdminLogin(userName,userPass);
+					System.out.println("Login details: " + validateAdminLogin);
 					System.out.println("Enter the Theatre Details as asked: ");
 					scanner.nextLine();
 					System.out.println("Enter the Theatre name");
@@ -47,6 +56,7 @@ public class MyApplication {
 					Integer city_pincode; 
 					try {
 							city_pincode = scanner.nextInt();
+							
 						}catch(Exception e) {
 							throw new Exception("Please enter valid pincode.");
 						}
@@ -54,7 +64,10 @@ public class MyApplication {
 					Theatre theatre = new Theatre();
 					System.out.println("");
 					try {
-						service.addTheatre(theatre);
+						theatre.setCityName(theatreCity);
+						theatre.setCityPincode(city_pincode);
+						theatre.setTheatreName(theatreName);
+						theatreService.save(theatre);
 						System.out.println("Theatre Added");
 					} catch (Exception exception) {
 						System.out.println(exception.getMessage());
@@ -83,7 +96,14 @@ public class MyApplication {
 					Movie movie = new Movie();
 					System.out.println("");
 					try {
-						service.addMovie(movie); //set other flags 1
+						movie.setDirector(director);
+						movie.setLanguage(language);
+						movie.setMovieName(name);
+						movie.setMovieReleaseDate(release_date);
+						movie.setGenre(genre);
+//						movie.setTheatre(theatreService.find(theaterid).getTheatreId());
+						
+						movieService.save(movie); //set other flags 
 						System.out.println("Movie Added");
 					} catch (Exception exception) {
 						System.out.println(exception.getMessage());
@@ -176,18 +196,19 @@ public class MyApplication {
 							Show show=new Show();
 							Customer customer = new Customer();
 							show.setShowId(showSelected);
-							System.out.println("Enter the booking Id");
-							BigInteger bookingId = scanner.nextBigInteger();
+//							System.out.println("Enter the booking Id");
+//							BigInteger bookingId = scanner.nextBigInteger();
 							System.out.println("Enter the seats you want");
 							Integer seatsBooked= scanner.nextInt();
 							System.out.println("Total Cost would be "+seatsBooked*200+ " Rs.");
 							Integer total_cost=seatsBooked*200;
 							String payment="Done";
-							booking.setBookingId(bookingId);
+//							booking.setBookingId(bookingId);
 							booking.setPayment(payment);
 							booking.setTotalCost(total_cost);
 							booking.setSeatsBooked(seatsBooked);
 							booking.setShow(show);
+							booking.setFlag(0);
 							BigInteger userId=customerService.getUserId(userName);
 							customer.setCustomerId(userId);
 							booking.setCustomer(customer);
@@ -196,8 +217,9 @@ public class MyApplication {
 								System.out.println("Booking could not be completed");
 							}
 							else
-								System.out.println("Booking successfully done: " +bookingId);
-													
+							System.out.println("Booking successfully done: " );
+							BigInteger bookingId=customerService.getBookingId(userId);
+							System.out.println("Booking Id : "+ bookingId);					
 						break;
 						case 2:
 							BigInteger userID=customerService.getUserId(userName);
@@ -271,8 +293,8 @@ public class MyApplication {
 
 				case 1:
 					Customer customer = new Customer();
-					System.out.println("Enter userid");
-					BigInteger userid = scanner.nextBigInteger();
+//					System.out.println("Enter userid");
+//					BigInteger userid = scanner.nextBigInteger();
 					System.out.println("Enter Username");
 					String customerName = scanner.next();
 					System.out.println("Enter the Password");
@@ -283,7 +305,7 @@ public class MyApplication {
 						System.out.println("Password Matched");
 						System.out.println("Enter your Phone number");
 						String contactNumber = scanner.next();
-						customer.setCustomerId(userid);
+//						customer.setCustomerId(userid);
 						customer.setCustomerName(customerName);
 						customer.setCustomerPassword(customerPass);
 						customer.setContactNumber(contactNumber);
@@ -302,8 +324,28 @@ public class MyApplication {
 					
 					break;
 				case 2:
-					//get movies in theaters
-					//get show for them
+					System.out.println("Movies: ");
+					List<Movie> movieList=customerService.getMovies();
+					for(Movie movie : movieList) {
+						System.out.println("" + movie.getMovieId() + " : " + movie.getMovieName());
+					}
+					System.out.println("Enter the Movie Id you want to book show for");
+					Integer movieId=scanner.nextInt();
+					System.out.println("Theatres with this movie: ");
+					List<String> theatresList = customerService.getTheatreByMovieId(movieId);
+					if (theatresList != null) {
+						theatresList.forEach(theatre -> {
+							System.out.println(theatre);
+						});
+					}
+					System.out.println("Enter the theatre Id: ");
+					Integer theatreSelected= scanner.nextInt();
+					List<String> showsList = customerService.getShows(movieId,theatreSelected);
+					if (showsList != null) {
+						showsList.forEach(show -> {
+							System.out.println(show);
+						});
+					}
 					break;
 				case 3:
 					exit(1);
