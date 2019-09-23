@@ -1,128 +1,84 @@
 package com.cg.movies.dto;
-import java.time.LocalDate;
-import java.util.*;
 
-	public class Customer {
+import javax.persistence.*;
 
-		public Integer customerId;
-		private String password;    
-		private String customerName;
-		private LocalDate dateOfBirth;
-	    private List<Booking> myBooking;
-	    private String customerContact;
-			
+import java.math.BigInteger;
+import java.util.List;
 
-			/**
-			* Default constructor
-			*/
-		    public Customer() {
-		    }
-			
-			public Customer(String customerName, LocalDate dateOfBirth, String customerContact) {
-				this.customerName = customerContact;
-				this.dateOfBirth = dateOfBirth;
-				this.customerContact = customerContact;
-		    }
+@Entity
+@Table(name = "customer")
+public class Customer {
 
-			 public boolean signIn(Integer customerId,  String password) {
-			        // TODO implement her
-					if(this.customerId.equals(customerId))
-						if(this.password.equals(password))
-							return true;
-						
-					return true;
-		    }
-			 
-//		    public List<Seat> cancelMovieTicket(Ticket ticket) {
-//				List<Seat> listOfSeat = ticket.listOfSeat;
-//				ListIterator<Seat> litr;
-//				litr = listOfSeat.listIterator();
-//				
-//				while(litr.hasNext()){
-//					litr.next().seatStatus = SeatStatus.AVAILABLE;
-//				}
-//				
-//				return listOfSeat;
-//		    }
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "user_id")
+	private BigInteger customerId;
+	@Column(name = "username")
+	private String customerName;
+	@Column(name = "password")
+	private String customerPassword;
+	@Column(name = "phone_number")
+	private String contactNumber;
+	
+	
+	@OneToMany
+	@JoinColumn(name = "booking_id")
+	private List<Booking> bookings;
+	
+	
 
-		    public Boolean chooseCity(Integer cityPincode) {
-		        return null;
-		    }
-		    
-		    
-		    /**********Getters and Setters***********/
-		    public Integer getCustomerId() {
-				return customerId;
-			}
+	public Customer() {
 
-			public void setCustomerId(Integer customerId) {
-				this.customerId = customerId;
-			}
+		// TODO Auto-generated constructor stub
+	}
 
-			public String getPassword() {
-				return password;
-			}
+	public Customer(BigInteger customerId, String customerName, String customerPassword, String contactNumber,
+			List<Booking> bookings) {
+		super();
+		this.customerId = customerId;
+		this.customerName = customerName;
+		this.customerPassword = customerPassword;
+		this.contactNumber = contactNumber;
+		this.bookings = bookings;
+	}
 
-			public void setPassword(String password) {
-				this.password = password;
-			}
+	public BigInteger getCustomerId() {
+		return customerId;
+	}
 
-			public String getCustomerName() {
-				return customerName;
-			}
+	public void setCustomerId(BigInteger customerId) {
+		this.customerId = customerId;
+	}
 
-			public void setCustomerName(String customerName) {
-				this.customerName = customerName;
-			}
+	public String getCustomerName() {
+		return customerName;
+	}
 
-			public LocalDate getDateOfBirth() {
-				return dateOfBirth;
-			}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
 
-			public void setDateOfBirth(LocalDate dateOfBirth) {
-				this.dateOfBirth = dateOfBirth;
-			}
+	public String getCustomerPassword() {
+		return customerPassword;
+	}
 
-			public List<Booking> getMyTickets() {
-				return null;
-			}
+	public void setCustomerPassword(String customerPassword) {
+		this.customerPassword = customerPassword;
+	}
 
-			
+	public String getContactNumber() {
+		return contactNumber;
+	}
 
-			public String getCustomerContact() {
-				return customerContact;
-			}
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
 
-			public void setCustomerContact(String customerContact) {
-				this.customerContact = customerContact;
-			}
+	public List<Booking> getBookings() {
+		return bookings;
+	}
 
-			@Override
-			public int hashCode() {
-				final int prime = 31;
-				int result = 1;
-				result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
-				return result;
-			}
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
+	}
 
-			@Override
-			public boolean equals(Object obj) {
-				if (this == obj)
-					return true;
-				if (obj == null)
-					return false;
-				if (getClass() != obj.getClass())
-					return false;
-				Customer other = (Customer) obj;
-				if (customerId == null) {
-					if (other.customerId != null)
-						return false;
-				} else if (!customerId.equals(other.customerId))
-					return false;
-				return true;
-			}
-
-		}
-
-
-
+}

@@ -1,10 +1,8 @@
 package com.cg.movies.ui;
 
-import com.cg.movies.dto.Movie;
-import com.cg.movies.dto.Screen;
-import com.cg.movies.dto.Show;
-import com.cg.movies.dto.Theatre;
+import com.cg.movies.dto.*;
 import com.cg.movies.service.*;
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -12,83 +10,19 @@ public class MyApplication {
 
 	public static void main(String[] args) throws Exception {
 
-		TheatreService service = new TheatreServiceImpl();
+		AdminService adminService = new AdminServiceImpl();
+		CustomerService customerService = new CustomerServiceImpl();
+		MovieService movieService = new MovieServiceImpl();
+		ShowService showService = new ShowServiceImpl();
+		TheatreService theatreService = new TheatreServiceImpl();
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		java.util.Date releaseDate = sdf.parse("2019-06-28");
-		java.util.Date movieEndDate = sdf.parse("2020-07-05");
-		java.util.Date releaseDate1 = sdf.parse("2019-09-10");
-		java.util.Date movieEndDate1 = sdf.parse("2019-09-17");
-
 		SimpleDateFormat sdf1 = new SimpleDateFormat("hh:mm:ss");
-		java.util.Date showStartTimeSM11 = sdf1.parse("2:05:00");// screen1
-		java.util.Date showEndTimeSM11 = sdf1.parse("16:00:00");
-		java.util.Date showStartTimeSM12 = sdf1.parse("10:05:00");// screen2
-		java.util.Date showEndTimeSM12 = sdf1.parse("1:00:00");
-		java.util.Date showStartTimeSM21 = sdf1.parse("05:05:00");// screen2
-		java.util.Date showEndTimeSM21 = sdf1.parse("08:00:00");
-		java.util.Date showStartTimeSM22 = sdf1.parse("18:05:00");// screen 1
-		java.util.Date showEndTimeSM22 = sdf1.parse("21:00:00");
-		java.util.Date showStartTimeSM23 = sdf1.parse("19:05:00");
-		java.util.Date showEndTimeSM23 = sdf1.parse("22:00:00");
-		// java.util.Date movieDate = sdf.parse("2019-09-11");
-		Map<Date, List<String>> bookedSeats = new HashMap<Date, List<String>>();
-		Map<Date, List<String>> blockedSeats = new HashMap<Date, List<String>>();
-		ArrayList<Show> listofShowsMovie1 = new ArrayList<Show>();
-		ArrayList<Show> listofShowsMovie2 = new ArrayList<Show>();
-		ArrayList<Movie> listofMovies = new ArrayList<Movie>();
 
-		try {
-			Movie movie1 = new Movie("Article 15", "Comedy Drama", "Rajkumar Hirani", 125, releaseDate, "English");
-			Movie movie2 = new Movie("Romeo Akbar Walter", "Thriller Drama", "SiddraJ Films", 195, releaseDate1,
-					"Hindi");
-
-			listofMovies.add(movie1);
-			listofMovies.add(movie2);
-			Show showM11 = new Show(movie1, movieEndDate, "English", showStartTimeSM11, showEndTimeSM11, bookedSeats,
-					blockedSeats);
-			Show showM12 = new Show(movie1, movieEndDate, "English", showStartTimeSM12, showEndTimeSM12, bookedSeats,
-					blockedSeats);
-			Show showM21 = new Show(movie2, movieEndDate, "English", showStartTimeSM21, showEndTimeSM21, bookedSeats,
-					blockedSeats);
-			Show showM22 = new Show(movie2, movieEndDate, "English", showStartTimeSM22, showEndTimeSM22, bookedSeats,
-					blockedSeats);
-			Show showM23 = new Show(movie2, movieEndDate, "English", showStartTimeSM23, showEndTimeSM23, bookedSeats,
-					blockedSeats);
-			listofShowsMovie1.add(showM11);
-			listofShowsMovie1.add(showM12);
-			listofShowsMovie2.add(showM21);
-			listofShowsMovie2.add(showM22);
-			listofShowsMovie2.add(showM23);
-		} catch (Exception e) {
-			System.out.println("Check date format");
-
-		}
-		ArrayList<Screen> listofScreensT1 = new ArrayList<Screen>();
-		ArrayList<Screen> listofScreensT2 = new ArrayList<Screen>();
-		ArrayList<Screen> listofScreensT3 = new ArrayList<Screen>();
-		Screen screenT11 = new Screen(10, 10, listofShowsMovie1);
-		Screen screenT21 = new Screen(10, 10, listofShowsMovie2);
-		Screen screenT22 = new Screen(10, 10, listofShowsMovie1);
-		Screen screenT31 = new Screen(10, 10, listofShowsMovie2);
-		Screen screenT32 = new Screen(10, 10, listofShowsMovie2);
-		listofScreensT1.add(screenT11);
-		listofScreensT2.add(screenT21);
-		listofScreensT2.add(screenT22);
-		listofScreensT3.add(screenT31);
-		listofScreensT3.add(screenT32);
-		Theatre theatre1 = new Theatre("Elante Mall", 160087, "kurnool", "Chandigarh", "Rajveer", "9814357234",
-				listofScreensT1, listofMovies);
-		Theatre theatre2 = new Theatre("Wave Cinemas", 160023, "Chandigarh", "Chandigarh", "Priyank", "8965234121",
-				listofScreensT2, listofMovies);
-		Theatre theatre3 = new Theatre("Saket CityMall", 140078, "Delhi", "Chandigarh", "Balwinder", "7865435652",
-				listofScreensT3, listofMovies);
-		service.addTheatre(theatre1);
-		service.addTheatre(theatre2);
-		service.addTheatre(theatre3);
 		Scanner scanner = new Scanner(System.in);
 		int count = 2;
 		while ((count--) > 0) {
+			System.out.println("****************  Start Page  ********************");
 			System.out.println("BELOW ARE THE PREFERRED ROLES");
 			System.out.println("1. Admin");
 			System.out.println("2. Registered User");
@@ -97,29 +31,44 @@ public class MyApplication {
 			System.out.println("Enter the type of User you are: ");
 			int choice = scanner.nextInt();
 			switch (choice) {
-
 			case 1:
-				System.out.println("1. Add Movie To Theater");
-				System.out.println("2. Remove Movie Show From Theater");
-				System.out.println("3. Add Theater");
-				System.out.println("4. Delete Theater");
-				System.out.println("5. Get Cities");
-				System.out.println("6. Get Theatres");
-				System.out.println("7. Quit");
+				System.out.println("1. Add Theater");
+				System.out.println("2. Add Movie To Theatre");
+				System.out.println("3. Add Movie Show");
+				System.out.println("4. Remove Movie From Theater");
+				System.out.println("5. Get Theatres");
+				System.out.println("6. Quit");
 				System.out.println("Enter Function Number you want to perform: ");
 				int input = scanner.nextInt();
 				switch (input) {
-
 				case 1:
-					// show theater list
-					System.out.println(service.getTheatres(5));
-
-					// add 2 validations here one for theatre id input and other for movie details
-
+					System.out.println("Enter the Theatre Details as asked: ");
+					scanner.nextLine();
+					System.out.println("Enter the Theatre name");
+					String theatreName = scanner.nextLine();
+					System.out.println("Enter the Theatre City");
+					String theatreCity = scanner.nextLine();
+					System.out.println("Enter the City Pincode");
+					Integer city_pincode;
+					try {
+						city_pincode = scanner.nextInt();
+					} catch (Exception e) {
+						throw new Exception("Please enter valid pincode.");
+					}
+					scanner.nextLine();
+					Theatre theatre = new Theatre();
+					System.out.println("");
+					try {
+						theatreService.save(theatre);
+						System.out.println("Theatre Added");
+					} catch (Exception exception) {
+						System.out.println(exception.getMessage());
+					}
+					break;
+				case 2:
+//					service.getTheatres();
 					System.out.println("Enter The Theater Id to which you want to add movie: ");
 					int theaterid = scanner.nextInt();
-					// method call with theater Id
-
 					System.out.println("Enter the Movie Details as asked: ");
 					scanner.nextLine();
 					System.out.println("Enter the movie name");
@@ -131,171 +80,114 @@ public class MyApplication {
 					System.out.println("Enter the movie length ");
 					Integer movieLength = scanner.nextInt();
 					scanner.nextLine();
-					System.out.println("Enter the movie release date");
-					Date date = sdf.parse(scanner.nextLine());
+					System.out.println("Enter the movie release date"); // today or next
+					Date release_date = sdf.parse(scanner.nextLine());
 					System.out.println("Enter the movie language");
 					String language = scanner.nextLine();
 
-					Movie movie = new Movie(name, genre, director, movieLength, date, language);
+					Movie movie = new Movie();
 
-					Show show = new Show(movie, sdf.parse("2019-06-28"), language, sdf1.parse("12:05:00"),sdf1.parse("3:05:00"), bookedSeats, blockedSeats);
-					System.out.println(service.getScreensInTheatre(theaterid).size() + " Screens exist");
-					System.out.println("Existing Screen Id are: ");
-					for (int i = 0; i < service.getScreensInTheatre(theaterid).size(); i++) {
-						System.out.println(service.getScreensInTheatre(theaterid).get(i).getScreenId());
-					}
-					System.out.println("Enter the screen you want to add movie to: ");
-					// increment should be for each theatre
-					int numberofMovies = service.getMoviesinTheatre(theaterid).size();
-					service.addShow(theaterid, scanner.nextInt(), show);
-					int updatedNumberofMovies = service.getMoviesinTheatre(theaterid).size();
-					if (updatedNumberofMovies > numberofMovies) {
+					try {
+						movieService.save(movie); // set other flags 1
 						System.out.println("Movie Added");
-					for (int i = 0; i < service.getMoviesinTheatre(theaterid).size(); i++) {
-						System.out.println(service.getMoviesinTheatre(theaterid).get(i).getMovieId() + " "
-								+ service.getMoviesinTheatre(theaterid).get(i).getMovieName());
-						}
+					} catch (Exception exception) {
+						System.out.println(exception.getMessage());
 					}
-					else {
-						System.out.println("Movie could not be added");
-					}
-
-					scanner.nextLine();
-
-					break;
-				case 2:
-					System.out.println(service.getTheatres(5));
-					System.out.println("Enter the theatre Id to remove Movie: ");
-					int theatreId = scanner.nextInt();
-					for (int i = 0; i < service.getMoviesinTheatre(theatreId).size(); i++) {
-						System.out.println(service.getMoviesinTheatre(theatreId).get(i).getMovieId() + " "
-								+ service.getMoviesinTheatre(theatreId).get(i).getMovieName());
-						}
-					
-					for (int i = 0; i < service.getScreensInTheatre(theatreId).size(); i++) {
-						System.out.println(service.getScreensInTheatre(theatreId).get(i));
-					}
-					System.out.println("Enter the screen id in which you want to delete");
-					Integer screenId = scanner.nextInt();
-					for (int i = 0; i < service.getShowsInScreen(theatreId, screenId).size(); i++) {
-						System.out.println(service.getShowsInScreen(theatreId, screenId).get(i));
-					}
-					System.out.println("Enter the show id to delete");
-					service.deleteShow(theatreId, screenId, scanner.nextInt());
-					scanner.nextLine();
 					break;
 				case 3:
-					System.out.println("Enter the theatre details");
+					System.out.println("Enter the TheatreId: ");
+					Integer theatreid = scanner.nextInt();
+					Integer movieId = 0; // get from method
+//					/movie_name=service.getMovieinTheatre(theatreid); //where flag is 0
+//					System.out.println("Enter the date for Movie Show: "+movie_name);
+					Date show_date = sdf.parse(scanner.nextLine());
+					System.out.println("Enter the show timings");
+					Date show_timings = sdf1.parse(scanner.nextLine());
+					System.out.println("Enter number of booked seats");
+					Integer booked_seats = scanner.nextInt();
+					System.out.println("Enter number of available seats");
+					Integer available_seats = scanner.nextInt();
+//					Show show = new Show(movieId,theatreid,booked_seats,available_seats,show_date,show_timings);
+					System.out.println("");
 					try {
-						service.addTheatre(new Theatre("Elante", 160087, "rajmundry", "Chandigarh", "Rajveer","9814357234", listofScreensT1, listofMovies));
+//						 service.addShow(show); //set other flags 1
+						System.out.println("Show Added");
 					} catch (Exception exception) {
 						System.out.println(exception.getMessage());
 					}
 					break;
 				case 4:
-					// show list of movies
-					List<Map.Entry<Integer, Theatre>> theatres = new ArrayList<>(service.getTheatres().entrySet());
-					for (int i = 0; i < theatres.size(); i++) {
-						System.out.println(theatres.get(i).getValue());
-					}
 					System.out.println("Enter the theatre id");
-					service.deleteTheatre(scanner.nextInt());
+					// fetch showcased movie
+//					service.deleteMovie(scanner.nextInt());
 					break;
 				case 5:
-					List<Map.Entry<Integer, String>> cities = new ArrayList<>(service.getCities().entrySet());
-					for (int i = 0; i < cities.size(); i++) {
-						System.out.println(cities.get(i).getKey() + " " + cities.get(i).getValue());
-					}
+//					service.getTheatres();
 					break;
 				case 6:
-					// show list of Theaters(optional to show movies in each theaters)
-					Map<Integer, Theatre> theatresm = service.getTheatres();
-					List<Map.Entry<Integer, Theatre>> theatreList = new ArrayList<>(theatresm.entrySet());
-					for (int i = 0; i < theatreList.size(); i++) {
-						System.out.println(theatreList.get(i).getValue());
-					}
-					break;
-
-				case 7:
 					exit(1);
-
+					break;
 				}
 				break;
-
 			case 2:
 				System.out.println("1. Login");
-				System.out.println("2. Book tickets");
-				System.out.println("3. Cancel tickets");
-				System.out.println("4. Quit");
+				System.out.println("2. View Movies");
+				System.out.println("3. Quit");
 				System.out.println("Enter Your choice: ");
 				int userChoice = scanner.nextInt();
 				switch (userChoice) {
 
 				case 1:
-					System.out.println("Enter the UserId: ");
+					System.out.println("Enter the UserName");
+					String userName = scanner.next();
 					System.out.println("Enter the Password: ");
-				case 2:
-					List<Map.Entry<Integer, String>> cities = new ArrayList<>(service.getCities().entrySet());
-					for (int i = 0; i < cities.size(); i++) {
-						System.out.println(cities.get(i).getKey() + " " + cities.get(i).getValue());
-					}
-					System.out.println("choose city pincode");
-					Integer pincode = scanner.nextInt();
-					System.out.println("enter your option ");
-					System.out.println("1 for search by theatre");
-					System.out.println("2 for search by movie");
-					Integer option = scanner.nextInt();
-					if (option == 1) {
-						for (int i = 0; i < service.getTheatres(pincode).size(); i++) {
-							System.out.println(service.getTheatres(pincode).get(i).getTheatreName() + " "
-									+ service.getTheatres(pincode).get(i));
-						}
-						System.out.println("enter the theatre id");
-						Integer id = scanner.nextInt();
-						for (int i = 0; i < service.getMoviesinTheatre(id).size(); i++) {
-							System.out.println(service.getMoviesinTheatre(id).get(i).getMovieName() + " "
-									+ service.getMoviesinTheatre(id).get(i).getMovieId());
-						}
-						Integer movieId = scanner.nextInt();
-						List<Show> shows = service.getShowsForMovieInTheatre(id, movieId);
-						for (int i = 0; i < shows.size(); i++) {
-							System.out.println(shows.get(i).getShowStartTime() + " " + shows.get(i).getShowId() + " "
-									+ shows.get(i).getMovieEndDate());
-						}
-						System.out.println("Enter show id");
-						Integer showId = scanner.nextInt();
-						List<String> seats = new ArrayList<>(3);
-						String date = (scanner.next());
-						for (int i = 0; i < 3; i++) {
-							seats.add(scanner.next());
-						}
-						service.updateSeats(id, showId, date, seats);
-						for (int i = 0; i < shows.size(); i++) {
-							if (shows.get(i).getShowId().equals(showId)) {
-								for (int j = 0; j < shows.get(i).getBookedSeats().get(sdf.parse(date)).size(); j++) {
-									System.out.println(shows.get(i).getBookedSeats().get(sdf.parse(date)));
-								}
-							}
-						}
+					String userPass = scanner.next();
+					Boolean validate_customer = customerService.validateCustomer(userName, userPass);
+					if (validate_customer == true) {
+						System.out.println("You've been successfully logged in");
+						System.out.println("1. Book Tickets");
+						System.out.println("2. View Bookings");
+						System.out.println("3. Cancel Bookings");
+						System.out.println("Enter your choice");
+						int userFunction = scanner.nextInt();
+						switch (userFunction) {
 
-					} else if (option == 2) {
-						for (Movie movie : service.getMovies(pincode)) {
-							System.out.println(movie.getMovieName());
+						case 1:
+							// get movies list from database
+							System.out.println("Enter the Movie Id you want to book");
+							// get theaters from database with that movie
+							// enter the theater to watch movie
+							// get the shows in that theater with that movie
+							// enter show id to book tickets for
+							// enter the number of seats
+							// get amount to be paid
+							// add booking
+
+							break;
+						case 2:
+							// pass username to get userid
+							// get bookings with this userid
+
+							break;
+						case 3:
+							// pass username to get userid
+							// get bookings with this userid
+							// remove booking by setting flag 1 to that booking
+							break;
+
 						}
+					} else {
+						System.out.println("Entered Username and password combination does not exist");
+						System.out.println("Please register or check the credentials");
+						exit(1);
 					}
+
+				case 2:
+					// get movies in theaters
+					// get show for them
 					break;
 				case 3:
-					// prints list of movies
-					System.out.println("Select movie you want to see shows for");
-					String bookMovie = scanner.next();
-					// method call by movie name
-					// print list of theaters that showcase that movie
-					System.out.println("Select Theater");
-					String bookTheater = scanner.next();
-					// print show for that movie id in this theater id by fetching theater id from
-					// theater name
-					System.out.println("Select Show");
-					// method call to book show
+					exit(1);
 					break;
 
 				}
@@ -309,25 +201,37 @@ public class MyApplication {
 				switch (viewerChoice) {
 
 				case 1:
-					System.out.println("Enter Your name");
-					System.out.println("Enter your contact");
+					Customer customer = new Customer();
+					System.out.println("Enter userid");
+					BigInteger userid = scanner.nextBigInteger();
+					System.out.println("Enter Username");
+					String customerName = scanner.next();
+					System.out.println("Enter the Password");
+					String customerPass = scanner.next();
+					System.out.println("Confirm Password");
+					String confirmPass = scanner.next();
+					if (customerPass.equals(confirmPass)) {
+						System.out.println("Password Matched");
+						System.out.println("Enter your Phone number");
+						String contactNumber = scanner.next();
+						customer.setCustomerId(userid);
+						customer.setCustomerName(customerName);
+						customer.setCustomerPassword(customerPass);
+						customer.setContactNumber(contactNumber);
+						try {
+							System.out.println(customerService.addCustomer(customer));
+						} catch (Exception e) {
+							System.out.println(e.getMessage());
+						}
+					} else {
+						System.out.println("Password doesn't Match");
+						exit(1);
+					}
 
-					System.out.println("Enter the password");
-					
 					break;
 				case 2:
-					// prints list of movies
-					System.out.println("Select movie you want to see shows for");
-					for (int i = 0; i < listofMovies.size(); i++) {
-						System.out.println(listofMovies.get(i));
-					}
-					String choseMovie = scanner.next();
-
-					// print list of theaters that showcase that movie
-					System.out.println("Select Theater");
-					String choseTheater = scanner.next();
-					// print show for that movie id in this theater id by fetching theater id from
-					// theater name
+					// get movies in theaters
+					// get show for them
 					break;
 				case 3:
 					exit(1);

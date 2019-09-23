@@ -2,179 +2,103 @@ package com.cg.movies.dto;
 
 import java.util.List;
 
+import javax.persistence.*;
+@Entity
+@Table(name = "theatre")
+
 public class Theatre {
+	@Id
+	@Column(name = "theatre_id")
+	private Integer theatreId;
+	@Column(name = "theatre_name")
+	private String theatreName;
+	@Column(name = "city_pincode")
+	private Integer cityPincode;
+	@Column(name = "theatre_city")
+	private String cityName;
 	
-	    private final Integer theatreId;
-	    private final String theatreName;
-	    private final Integer cityPincode;
-	    private final String cityName;
-	    private final String theatreLocation;
-	    private final String managerName;
-	    private final String managerContact;
-	    private List<Screen> screens;
-	    private List<Movie> movies;
-	    private static Integer count=0;
+	@ManyToMany(mappedBy = "theatres", cascade = CascadeType.PERSIST)
+	private List<Movie> movieList;
+	
+	@OneToMany
+	@JoinColumn(name = "show_id")
+	private List<Show> showsList;
 
-	    public Theatre(String theatreName, Integer cityPincode,
-	                   String cityName, String theatreLocation, String managerName,
-	                   String managerContact) {
-	        this.theatreId = ++count;
-	        this.theatreName = theatreName;
-	        this.cityPincode = cityPincode;
-	        this.cityName = cityName;
-	        this.theatreLocation = theatreLocation;
-	        this.managerName = managerName;
-	        this.managerContact = managerContact;
-	    }
-
-	    public Theatre(String theatreName, Integer cityPincode, String cityName,
-	                   String theatreLocation, String managerName, String managerContact,
-	                   List<Screen> screens, List<Movie> movies) {
-	        this.theatreId = ++count;
-	        this.theatreName = theatreName;
-	        this.cityPincode = cityPincode;
-	        this.cityName = cityName;
-	        this.theatreLocation = theatreLocation;
-	        this.managerName = managerName;
-	        this.managerContact = managerContact;
-	        this.screens = screens;
-	        this.movies = movies;
-	    }
-
-	    public Integer getTheatreId() {
-	        return theatreId;
-	    }
-
-	    public String getTheatreName() {
-	        return theatreName;
-	    }
-
-	    public Integer getCityPincode() {
-	        return cityPincode;
-	    }
-
-	    public String getCityName() {
-	        return cityName;
-	    }
-
-	    public String getTheatreLocation() {
-	        return theatreLocation;
-	    }
-
-	    public String getManagerName() {
-	        return managerName;
-	    }
-
-	    public String getManagerContact() {
-	        return managerContact;
-	    }
-
-	    public List<Screen> getScreens() {
-	        return screens;
-	    }
-
-	    public void setScreens(List<Screen> screens) {
-	        this.screens = screens;
-	    }
-
-	    public List<Movie> getMovies() {
-	        return movies;
-	    }
-
-	    public void setMovies(List<Movie> movies) {
-	        this.movies = movies;
-	    }
-
-	    public static Integer getCount() {
-	        return count;
-	    }
-
-	    public void setCount() {
-	        count--;
-	    }
-
-	    @Override
-	    public int hashCode() {
-	        final int prime = 31;
-	        int result = 1;
-	        result = prime * result + ((cityName == null) ? 0 : cityName.hashCode());
-	        result = prime * result + ((cityPincode == null) ? 0 : cityPincode.hashCode());
-	        result = prime * result + ((managerContact == null) ? 0 : managerContact.hashCode());
-	        result = prime * result + ((managerName == null) ? 0 : managerName.hashCode());
-	        result = prime * result + ((movies == null) ? 0 : movies.hashCode());
-	        result = prime * result + ((screens == null) ? 0 : screens.hashCode());
-	        result = prime * result + ((theatreLocation == null) ? 0 : theatreLocation.hashCode());
-	        result = prime * result + ((theatreName == null) ? 0 : theatreName.hashCode());
-	        return result;
-	    }
-
-	    @Override
-	    public boolean equals(Object obj) {
-	        if (this == obj)
-	            return true;
-	        if (obj == null)
-	            return false;
-	        if (getClass() != obj.getClass())
-	            return false;
-	        Theatre other = (Theatre) obj;
-	        if (cityName == null) {
-	            if (other.cityName != null)
-	                return false;
-	        } else if (!cityName.equals(other.cityName))
-	            return false;
-	        if (cityPincode == null) {
-	            if (other.cityPincode != null)
-	                return false;
-	        } else if (!cityPincode.equals(other.cityPincode))
-	            return false;
-	        if (managerContact == null) {
-	            if (other.managerContact != null)
-	                return false;
-	        } else if (!managerContact.equals(other.managerContact))
-	            return false;
-	        if (managerName == null) {
-	            if (other.managerName != null)
-	                return false;
-	        } else if (!managerName.equals(other.managerName))
-	            return false;
-	        if (movies == null) {
-	            if (other.movies != null)
-	                return false;
-	        } else if (!movies.equals(other.movies))
-	            return false;
-	        if (screens == null) {
-	            if (other.screens != null)
-	                return false;
-	        } else if (!screens.equals(other.screens))
-	            return false;
-	        if (theatreLocation == null) {
-	            if (other.theatreLocation != null)
-	                return false;
-	        } else if (!theatreLocation.equals(other.theatreLocation))
-	            return false;
-	        if (theatreName == null) {
-	            if (other.theatreName != null)
-	                return false;
-	        } else if (!theatreName.equals(other.theatreName))
-	            return false;
-	        return true;
-	    }
-
-	    @Override
-	    public String toString() {
-	        return "Theatre{" +
-	                "theatreId=" + theatreId +
-	                ", theatreName='" + theatreName + '\'' +
-	                ", cityPincode=" + cityPincode +
-	                ", cityName='" + cityName + '\'' +
-	                ", theatreLocation='" + theatreLocation + '\'' +
-	                ", managerName='" + managerName + '\'' +
-	                ", managerContact='" + managerContact + '\'' +
-	                ", screens=" + screens +
-	                ", movies=" + movies +
-	                '}';
-	    }
+	
+	
+	
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Theatre [theatreId=" + theatreId + ", theatreName=" + theatreName + ", cityPincode=" + cityPincode
+				+ ", cityName=" + cityName + "]";
 	}
 
+	public Theatre() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
+	public Theatre(Integer theatreId, String theatreName, Integer cityPincode, String cityName, List<Movie> movieList,
+			List<Show> showsList) {
+		super();
+		this.theatreId = theatreId;
+		this.theatreName = theatreName;
+		this.cityPincode = cityPincode;
+		this.cityName = cityName;
+		this.movieList = movieList;
+		this.showsList = showsList;
+	}
 
+	public Integer getTheatreId() {
+		return theatreId;
+	}
+
+	public void setTheatreId(Integer theatreId) {
+		this.theatreId = theatreId;
+	}
+
+	public String getTheatreName() {
+		return theatreName;
+	}
+
+	public void setTheatreName(String theatreName) {
+		this.theatreName = theatreName;
+	}
+
+	public Integer getCityPincode() {
+		return cityPincode;
+	}
+
+	public void setCityPincode(Integer cityPincode) {
+		this.cityPincode = cityPincode;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	public List<Movie> getMovieList() {
+		return movieList;
+	}
+
+	public void setMovieList(List<Movie> movieList) {
+		this.movieList = movieList;
+	}
+
+	public List<Show> getShowsList() {
+		return showsList;
+	}
+
+	public void setShowsList(List<Show> showsList) {
+		this.showsList = showsList;
+	}
+	
+	
+}

@@ -1,121 +1,126 @@
 package com.cg.movies.dto;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.sql.Time;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import javax.persistence.*;
+@Entity
+@Table(name = "movie_show")
 public class Show {
-
-	private final Integer showId;
-    private Movie currentMovie;
-    private Date movieEndDate;
-    private String language;
-    private Date showStartTime;
-    private Date showEndTime;
-    private Map<Date,List<String>> bookedSeats;
-    private Map<Date,List<String>> blockedSeats;
-    private static int count=0;
-
-    public Show(Movie currentMovie, Date movieEndDate, String language, Date showStartTime,
-                Date showEndTime, Map<Date,List<String>> bookedSeats, Map<Date,List<String>> blockedSeats) throws Exception {
-        this.showId=++count;
-        this.currentMovie = currentMovie;
-        this.movieEndDate = movieEndDate;
-        this.language = language;
-        this.showStartTime = showStartTime;
-        this.showEndTime = showEndTime;
-
-        this.bookedSeats = bookedSeats;
-        String str="2019-07-";
-        SimpleDateFormat sdf=  new SimpleDateFormat("yyyy-MM-dd");
-        for(int i=5;i<=10;i++){
-            str="2019-07-"+i;
-            //this.bookedSeats.put(sdf.parse(str),new ArrayList<>());
-        }
-        this.blockedSeats = blockedSeats;
-    }
-
-    public Integer getShowId() {
-        return showId;
-    }
-
-    public Movie getCurrentMovie() {
-        return currentMovie;
-    }
-
-    public void setCurrentMovie(Movie currentMovie) {
-        this.currentMovie = currentMovie;
-    }
-
-    public Date getMovieEndDate() {
-        return movieEndDate;
-    }
-
-    public void setMovieEndDate(Date movieEndDate) {
-        this.movieEndDate = movieEndDate;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public Date getShowStartTime() {
-        return showStartTime;
-    }
-
-    public void setShowStartTime(Date showStartTime) {
-        this.showStartTime = showStartTime;
-    }
-
-    public Date getShowEndTime() {
-        return showEndTime;
-    }
-
-    public void setShowEndTime(Date showEndTime) {
-        this.showEndTime = showEndTime;
-    }
-
-
-
-    public Map<Date, List<String>> getBookedSeats() {
-        return bookedSeats;
-    }
-
-    public void setBookedSeats(Map<Date,List<String>> bookedSeats) {
-        this.bookedSeats = bookedSeats;
-    }
-
-    public Map<Date, List<String>> getBlockedSeats() {
-        return blockedSeats;
-    }
-
-    public void setBlockedSeats(Map<Date,List<String>> blockedSeats) {
-        this.blockedSeats = blockedSeats;
-    }
-
-    public static int getCount() {
-        return count;
-    }
-
-    @Override
-    public String toString() {
-        return "Show{" +
-                "showId=" + showId +
-                ", currentMovie=" + currentMovie +
-                ", movieEndDate=" + movieEndDate +
-                ", language='" + language + '\'' +
-                ", showStartTime=" + showStartTime +
-                ", showEndTime=" + showEndTime +
-                '}';
-    }
-
-}
+	@Id
+	@Column(name = "show_id")
+	private Integer showId;
+	@Column(name = "show_date")
+	private Date show_date;
+	@Column(name = "show_timings")
+	private Time show_timings;
+	@Column(name = "available_seats")
+	private Integer availableSeats;
+	@Column(name = "booked_seats")
+	private Integer bookedSeats;
+	
+	@ManyToOne
+	@JoinColumn(name = "movie_id")
+	private Movie movie;
+	@ManyToOne
+	@JoinColumn(name = "theatre_id")
+	private Theatre theatre;
+	
+	@OneToMany
+	@JoinColumn(name = "booking_id")
+	private List<Booking> bookings;
 
 	
+	
+	
+	@Override
+	public String toString() {
+		return "Show [showId=" + showId + ", show_date=" + show_date + ", show_timings=" + show_timings
+				+ ", availableSeats=" + availableSeats + ", bookedSeats=" + bookedSeats + "]";
+	}
+
+	public Show() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Show(Integer showId, Date show_date, Time show_timings, Integer availableSeats, Integer bookedSeats,
+			Movie movie, Theatre theatre, List<Booking> bookings) {
+		super();
+		this.showId = showId;
+		this.show_date = show_date;
+		this.show_timings = show_timings;
+		this.availableSeats = availableSeats;
+		this.bookedSeats = bookedSeats;
+		this.movie = movie;
+		this.theatre = theatre;
+		this.bookings = bookings;
+	}
+
+	public Integer getShowId() {
+		return showId;
+	}
+
+	public void setShowId(Integer showId) {
+		this.showId = showId;
+	}
+
+	public Date getShow_date() {
+		return show_date;
+	}
+
+	public void setShow_date(Date show_date) {
+		this.show_date = show_date;
+	}
+
+	public Time getShow_timings() {
+		return show_timings;
+	}
+
+	public void setShow_timings(Time show_timings) {
+		this.show_timings = show_timings;
+	}
+
+	public Integer getAvailableSeats() {
+		return availableSeats;
+	}
+
+	public void setAvailableSeats(Integer availableSeats) {
+		this.availableSeats = availableSeats;
+	}
+
+	public Integer getBookedSeats() {
+		return bookedSeats;
+	}
+
+	public void setBookedSeats(Integer bookedSeats) {
+		this.bookedSeats = bookedSeats;
+	}
+
+	public Movie getMovie() {
+		return movie;
+	}
+
+	public void setMovie(Movie movie) {
+		this.movie = movie;
+	}
+
+	public Theatre getTheatre() {
+		return theatre;
+	}
+
+	public void setTheatre(Theatre theatre) {
+		this.theatre = theatre;
+	}
+
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
+	}
+
+	
+}
