@@ -18,7 +18,9 @@ public class MovieDaoImpl implements MovieDao{
 	public Movie save(Movie movie) {
 		
 		EntityManager em = entityFactory.createEntityManager();
-		Query query = em.createQuery("FROM Movie");
+		Query query = em.createQuery("From Movie where movieName = :first and language  = :second");
+		query.setParameter("first",movie.getMovieName());
+		query.setParameter("second",movie.getLanguage());
 		
 		@SuppressWarnings("unchecked")
 		List<Movie> movieList=query.getResultList();

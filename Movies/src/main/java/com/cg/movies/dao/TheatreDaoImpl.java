@@ -14,8 +14,8 @@ public class TheatreDaoImpl implements TheatreDao {
 	public Theatre save(Theatre theatre) {
 		
 		EntityManager em = entityFactory.createEntityManager();
-		Query query = em.createQuery("FROM Theatre");
-		
+		Query query = em.createQuery("FROM Theatre WHERE theatreId= :first");
+		query.setParameter("first",theatre.getTheatreId());
 		@SuppressWarnings("unchecked")
 		List<Theatre> theatreList=query.getResultList();
 		

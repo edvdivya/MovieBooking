@@ -7,7 +7,7 @@ import com.cg.movies.exception.UserException;
 public class CustomerServiceImpl implements CustomerService {
 		
 	CustomerDao dao=new CustomerDaoImpl();
-	@Override
+	
 	public Customer addCustomer(Customer customer) throws UserException {
 		// TODO Auto-generated method stub
 		if(Validate.validateCustomer(customer)) {
@@ -16,7 +16,7 @@ public class CustomerServiceImpl implements CustomerService {
 		return null;
 	}
 
-	@Override
+	
 	public Boolean validateCustomer(String userName, String userPass) throws UserException {
 		// TODO Auto-generated method stub
 		return dao.validateCustomer(userName,userPass);

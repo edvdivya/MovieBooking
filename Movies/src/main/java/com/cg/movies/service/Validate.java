@@ -1,5 +1,7 @@
 package com.cg.movies.service;
 
+import java.time.LocalDate;
+
 import com.cg.movies.dto.Customer;
 import com.cg.movies.dto.Movie;
 import com.cg.movies.dto.Show;
@@ -69,5 +71,10 @@ public class Validate {
 			throw new UserException("Contact number should be 10 digits");
 		}
 		return true;
+	}
+	public void validateDate(LocalDate date) throws DateException {
+		if(!date.isAfter(LocalDate.now())){
+			throw new DateException("Date should be after today's date");
+		}
 	}
 }
