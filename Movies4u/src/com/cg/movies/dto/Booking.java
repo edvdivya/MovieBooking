@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="booking")
 public class Booking {
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="booking_id")
 	private BigInteger bookingId;
 	@Column(name="seats_booked")

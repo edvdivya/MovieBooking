@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "customer")
 public class Customer {
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="user_id")
 	private BigInteger customerId;
 	@Column(name="username")

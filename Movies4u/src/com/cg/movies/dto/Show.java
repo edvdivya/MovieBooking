@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="movie_show")
 public class Show {
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="show_id")
 	private Integer showId;
 	@Column(name="show_date")
