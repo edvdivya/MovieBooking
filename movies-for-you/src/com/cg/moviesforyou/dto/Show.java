@@ -29,7 +29,7 @@ public class Show {
 	@Column(name="available_seats")
     private Integer availableSeats;
 	@Column(name="blocked_seats")
-    private Integer blockedSeats;
+    private Integer blockedSeats=20;
 	
 	
 	@ManyToOne

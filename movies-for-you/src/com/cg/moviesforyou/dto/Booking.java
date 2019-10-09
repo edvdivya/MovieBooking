@@ -25,7 +25,6 @@ public class Booking {
 	@Column(name="delete_flag")
 	private Integer flag=0;
 	
-	
 	@ManyToOne
 	@JoinColumn(name = "show_id")
 	private Show show;
