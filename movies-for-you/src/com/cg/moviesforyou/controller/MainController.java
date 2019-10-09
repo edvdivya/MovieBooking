@@ -96,7 +96,8 @@ public class MainController {
 		myGenreList.add("Thriller");
 		myGenreList.add("Comedy");
 		myGenreList.add("Romance");
-
+		myGenreList.add("Romance");
+		
 		myLanguageList.add("Hindi");
 		myLanguageList.add("English");
 		myLanguageList.add("Marathi");
