@@ -309,7 +309,6 @@ public class MainController {
 		if (showsinList.size() > 0) {
 			System.out.println("in loop");
 			model.put("showsList", showsinList);
-			System.out.println("model put done");
 			httpSession.setAttribute("theatreId", theatreID);
 			System.out.println("theatre set as" + theatreID);
 			return "ChoseShowPage";
