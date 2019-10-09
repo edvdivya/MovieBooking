@@ -80,7 +80,6 @@ public class CustomerDaoImpl implements CustomerDao {
 		Theatre theatre = manager.find(Theatre.class, theatreId);
 		if (theatre != null) {
 			List<Show> showsList = theatre.getShowsList();
-			System.out.println("show list"+showsList);
 			List<Show> selectedShow = new ArrayList<Show>();
 			for(Show showin : showsList) {
 				if(showin.getMovie().getMovieId()==movieId) {
